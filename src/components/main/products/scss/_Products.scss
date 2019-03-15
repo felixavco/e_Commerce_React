@@ -1,0 +1,91 @@
+/*
+  Styles for ProductItem.js 
+*/
+.product-item {
+	box-shadow: 0px 0px 5px $textPrimary;
+	height: 235px;
+	max-height: 235px;
+	max-width: 475px;
+  transition: all 200ms linear;
+  margin-bottom: 1.5rem;
+
+  h5 {
+    padding-top: 1rem;
+  }
+  
+  &:hover {
+    box-shadow: 0px 0px 15px $textPrimary;
+  }
+
+	.cont {
+		display: flex;
+    flex-direction: row;
+    
+		.img-cont {
+			display: flex;
+			align-items: center;
+			padding: 0 .3rem 0 0.5rem;
+			img {
+				border-radius: 0.3rem;
+			}
+		}
+
+		.price {
+			display: flex;
+			justify-content: flex-end;
+			padding-right: 2rem;
+
+			.reg-price,
+			.disc-price {
+        color: $textSecondary;
+        background-color: $primary;
+        padding: 0.2rem 0.4rem;
+        border-radius: 0.3rem;
+				font-weight: 600;
+				font-size: 1.2rem;
+      }
+      
+      .reg-price {
+        margin-left: 63%;
+      }
+
+			.x-price {
+				color: red;
+				font-size: 1.2rem;
+				text-decoration: line-through;
+				opacity: 0.85;
+			}
+
+			.hide-price {
+				display: none;
+			}
+		}
+
+		.actions {
+			margin-top: 1rem;
+			display: flex;
+			align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem 0 0.7rem;
+      a {
+        color: $primary;
+      }
+    }
+    
+    .description {
+      margin-top: -1rem;
+      padding: 0.3rem;
+    }
+	}
+}
+
+/*
+  Styles for Products.js 
+*/
+.products {
+  display: flex;
+  justify-content: center;
+}
+
+
+

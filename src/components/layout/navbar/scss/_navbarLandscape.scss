@@ -1,0 +1,43 @@
+@media (min-width: $landscape) {
+	header {
+		.nav {
+			.topNav {
+				.secondary-menu {
+					justify-content: center;
+				}
+			}
+
+			.bottomNav {
+				.brand {
+					margin-top: 5rem;
+				}
+
+				.mainNav {
+					ul {
+						margin-top: -1.5rem;
+						a {
+							font-size: 1.5rem;
+							line-height: 3.25rem;
+						}
+					}
+				}
+			}
+		}
+
+		.open-menu {
+			float: right;
+			margin-right: 2rem;
+			height: 100%;
+			display: flex;
+			align-items: center;
+			color: $textSecondary;
+			i {
+				font-size: 2.7rem;
+			}
+		}
+
+		.menuActive {
+			left: 0;
+		}
+	}
+}

@@ -1,0 +1,75 @@
+@media (min-width: $medium) {
+	header {
+		.nav {
+			.bottomNav {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				height: 65%;
+
+				.brand {
+					position: static;
+					color: $primary;
+					font-weight: 600;
+					margin: 0 0 0 2rem;
+				}
+
+				.mainNav {
+					ul {
+						display: flex;
+						flex-direction: row;
+						align-items: center;
+						height: 100%;
+						margin: 0;
+						a {
+							font-size: 1.3rem;
+						}
+
+						li:hover {
+							a {
+								color: $primary;
+								background-color: transparent;
+							}
+						}
+					}
+				}
+
+				.searchBar {
+          display: inline-block;
+					margin-right: 2rem;
+					position: relative;
+					color: $textSecondary;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					width: 25%;
+
+					input {
+						background: lighten( $textPrimary, 25% );
+						width: 100%;
+						margin: 0;
+						border: none;
+						padding-left: 0.7rem;
+						border-radius: 2rem;
+						font-weight: 500;
+						transform: scale(0);
+						transform-origin: 100%;
+						transition: all 250ms linear;
+					}
+
+					.input-active {
+						transform: scale(1);
+					}
+
+					.search-icon {
+						cursor: pointer;
+					}
+				}
+			}
+		}
+
+		.open-menu {
+			display: none;
+		}
+	}
+}

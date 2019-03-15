@@ -1,0 +1,115 @@
+@media (min-width: $tablet) {
+	header {
+		background: $textPrimary;
+		height: 8rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		.brand2 {
+			display: none;
+		}
+
+		.nav {
+			background: $textPrimary;
+			position: static;
+			height: 100%;
+			width: 100%;
+			padding-top: 0;
+
+			.topNav {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				height: 35%;
+				background: $textSecondary;
+
+				h6 {
+					color: $textPrimary;
+					font-size: 1.1rem;
+					margin: 0 0 0 2rem;
+					a,
+					span {
+						color: $primary;
+						font-weight: 700;
+					}
+				}
+
+				.close-btn {
+					display: none;
+				}
+
+				.secondary-menu {
+					position: static;
+					display: inline;
+					padding: 0;
+					a {
+						font-size: 1.1rem;
+						color: $textPrimary;
+						font-weight: 500;
+						&:hover {
+							text-decoration: underline $primary;
+							background: none;
+						}
+					}
+				}
+
+				.topBag {
+					position: static;
+					top: 0;
+					left: 0;
+					margin: 0 2rem 0 0;
+
+					.bag-container {
+						.fas {
+							color: $textPrimary;
+						}
+					}
+				}
+			}
+
+			.bottomNav {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				height: 65%;
+
+				.brand {
+					position: static;
+					color: $primary;
+					font-weight: 600;
+					margin: 0 0 0 2rem;
+				}
+
+				.mainNav {
+					ul {
+						display: flex;
+						flex-direction: row;
+						align-items: center;
+						height: 100%;
+						margin: 0;
+						a {
+							font-size: 1.3rem;
+						}
+
+						li:hover {
+							a {
+								color: $primary;
+								background-color: transparent;
+							}
+						}
+					}
+				}
+
+				.searchBar,
+				.cartMainNav {
+					display: none;
+				}
+			}
+		}
+
+		.open-menu {
+			display: none;
+		}
+	}
+}

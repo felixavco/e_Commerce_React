@@ -1,0 +1,27 @@
+//Var Colors
+$primary: #F62F5E;
+$textPrimary: #2E2E2E;
+$textSecondary: #FFF;
+
+//Screen Sizes
+$landscape: 500px;
+$tablet: 750px;
+$medium: 1024px;
+$large: 1200px;
+$x-large: 1500px;
+
+//Navbar
+@import '../components/layout/navbar/scss/Navbar.scss';
+/*Landscape > 500px*/
+@import '../components/layout/navbar/scss/navbarLandscape';
+/*Tablet > 750px*/
+@import '../components/layout/navbar/scss/navbarTablet';
+/*Medium Screens > 1024px*/
+@import '../components/layout/navbar/scss/navbarMedium';
+
+//Products 
+@import '../components/main/products/scss/Products';
+/*Large Screens > 1200px */
+@import '../components/main/products/scss/productsLarge';
+/*Extra Large Screens > 1500px */
+@import '../components/main/products/scss/productsXLarge';

@@ -1,0 +1,10 @@
+@media (min-width: $x-large) {
+  .products {
+    display: block;
+
+    .cont {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
