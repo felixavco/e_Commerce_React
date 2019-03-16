@@ -1,13 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import MainNav from './MainNav';
 
-const BottomNav = ({ closeMenu, isSearch, toggleSearch }) => {
+const BottomNav = ({ closeMenu, isSearch, toggleSearch, searchText, onChange }) => {
 
 	return (
 		<div className="bottomNav">
 			<div>
-				<h4 className="brand">SHOPMATE</h4>
+			<Link to="/"><h4 className="brand">SHOPMATE</h4></Link>
 			</div>
 
 			<div className="col s12 l4">
@@ -15,7 +16,15 @@ const BottomNav = ({ closeMenu, isSearch, toggleSearch }) => {
 			</div>
 
 			<div className="searchBar">
-				<input className={isSearch ? "input-active" : ""} type="text" name="search" id="search" placeholder="Search Anything" />
+				<input 
+					className={isSearch ? "input-active" : ""} 
+					onChange={onChange}
+					type="text" 
+					name="searchText" 
+					id="search" 
+					value={searchText} 
+					placeholder="Search Anything" 
+				/>
 				<i onClick={toggleSearch} className="small material-icons search-icon">search</i>
 			</div>
 		</div>

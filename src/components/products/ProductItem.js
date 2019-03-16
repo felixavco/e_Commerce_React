@@ -1,10 +1,13 @@
 import React from 'react';
-import { baseURL } from '../../../config/config';
+import { baseURL } from '../../config/config';
 import { Link } from 'react-router-dom';
+// import { connect } from 'react-redux'
+// import { addProdToChart } from '../../redux/actions/shoppingCartActions';
 const productImagesURL = baseURL + '/images/products/';
 
-const ProductItem = ({ product }) => {
+const ProductItem = ({ product, addToChart }) => {
 	const { product_id, name, description, price, discounted_price, thumbnail } = product;
+
 	return (
 		<div className="product-item">
 			<h5 className="center-align">{name}</h5>
@@ -25,8 +28,8 @@ const ProductItem = ({ product }) => {
 						</span>
 					</div>
 					<div className="actions">
-						<Link to={'/product/' + product_id}><i class="far fa-plus-square"/> See Details...</Link>
-						<button className="btn-floating btn waves-effect waves-light red">
+						<Link to={'/product/' + product_id}><i className="far fa-plus-square"/> See Details...</Link>
+						<button onClick={() => addToChart(product_id)} className="btn-floating btn waves-effect waves-light red">
 							<i className="small material-icons">add_shopping_cart</i>
 						</button>
 					</div>

@@ -17,8 +17,17 @@ class Register extends Component {
 			email: '',
 			password: '',
 			password2: '',
-			errors: {}
+			pwdMatch: true,
+			errors: {},
+			errorField: []
 		};
+	}
+
+	componentWillMount() {
+		/*When the user is logged, this will redirect the user to the home page if they try to manually access to this route*/
+		if(this.props.auth.isAuthenticated) {
+      this.props.history.push('/')
+    }
 	}
 
 	//Set errors from redux to the component state
@@ -27,26 +36,41 @@ class Register extends Component {
 			this.setState({ 
 				errors: nextProps.errors,
 				isLoading: false
-			});
+			}, () => this.getErrorMessage());
 		}
 	};
 
 	// Set state values when user types on inputs
 	onChange = (e) => this.setState({ [e.target.name]: e.target.value });
+	
 
 	onSubmit = (e) => {
 		e.preventDefault();
 		const { name, email, password, password2 } = this.state;
 		this.setState({isLoading: true});
 		if (password !== password2) {
-			return alert("Password don't match");
+			return this.setState({
+				pwdMatch: false,
+				isLoading: false
+			});
 		}
+		this.setState({pwdMatch: true});
 		this.props.authUser({ name, email, password }, this.props.history);
 	};
 
+	
+	getErrorMessage = () => {
+		const { errors } = this.state;
+		if(this.state.errors.field){
+			this.setState({ errorField: errors.field.split(',')});
+		}
+	}
+
 	render() {
-		const { name, email, password, password2, isLoading } = this.state;
+
+		const { name, email, password, password2, isLoading, errors, errorField, pwdMatch } = this.state;
 		let content;
+
 		if (isLoading) {
 			content = (
 				<div>
@@ -64,11 +88,13 @@ class Register extends Component {
 		}
 
 		return (
-			<div className="container">
+			<div className="container register">
 				<h3 className="center-align">Register</h3>
+				
 				<div className="container" >
-					<form onSubmit={this.onSubmit} className="row" noValidate>
-						<div className="col s12 input-field">
+					<small className={errorField.length > 1 ? "onError" : ""}>* All Fields Are Required!</small>
+					<form onSubmit={this.onSubmit} className={errorField.length > 1 ? "onErrorAll row" : "row"} noValidate>
+						<div className={`col s12 input-field  ${errors.field === "name" ? "onErrorInput" : ""}`} >
 							<input 
 								onChange={this.onChange} 
 								id="name" 
@@ -76,10 +102,10 @@ class Register extends Component {
 								name="name" 
 								value={name} 
 							/>
-							<label htmlFor="name">Name</label>
+							<label htmlFor="name">{errors.field === "name" ? "Name is required!" : "Name *"}</label>
 						</div>
 
-						<div className="col s12 input-field">
+						<div className={`col s12 input-field  ${errors.field === "email" ? "onErrorInput" : ""}`}>
 							<input 
 								onChange={this.onChange} 
 								id="email" 
@@ -87,11 +113,11 @@ class Register extends Component {
 								name="email" 
 								value={email} 
 							/>
-							<label htmlFor="email">Email</label>
+							<label htmlFor="email">{errors.field === "email" ? errors.message : "Email *"}</label>
 						</div>
 
 						<div className="row">
-							<div className="col s12 l6 input-field">
+							<div className={`col s12 l6 input-field  ${errors.field === "password" ? "onErrorInput" : ""}`}>
 								<input
 									onChange={this.onChange}
 									id="password"
@@ -99,10 +125,10 @@ class Register extends Component {
 									name="password"
 									value={password}
 								/>
-								<label htmlFor="password">Password</label>
+								<label htmlFor="password">{errors.field === "password" ? "Password is required!" : "Password *"}</label>
 							</div>
 
-							<div className="col s12 l6 input-field">
+							<div className={`col s12 l6 input-field  ${!pwdMatch ? "onErrorInput" : ""}`}>
 								<input
 									onChange={this.onChange}
 									id="password2"
@@ -110,7 +136,7 @@ class Register extends Component {
 									name="password2"
 									value={password2}
 								/>
-								<label htmlFor="password2">Confirm your Password</label>
+								<label htmlFor="password2">{!pwdMatch ? "Passwords don't match" : "Confirm your Password *"}</label>
 							</div>
 						</div>
 						{ content }

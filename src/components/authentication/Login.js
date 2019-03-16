@@ -19,6 +19,13 @@ class Login extends Component {
 		};
 	}
 
+	componentWillMount() {
+		/*When the user is logged, this will redirect the user to the home page if they try to manually access to this route*/
+		if(this.props.auth.isAuthenticated) {
+      this.props.history.push('/')
+    }
+	}
+
 	//Set errors from redux to the component state
 	componentWillReceiveProps = (nextProps) => {
 		if (nextProps.errors) {
@@ -40,7 +47,7 @@ class Login extends Component {
 	};
 
 	render() {
-		const { email, password, isLoading } = this.state;
+		const { email, password, isLoading, errors } = this.state;
 		let content;
 		if (isLoading) {
 			content = (
@@ -59,12 +66,13 @@ class Login extends Component {
 		}
 
 		return (
-			<div className="container">
+			<div className="container login">
 				<h3 className="center-align">Sign in</h3>
 				<div className="container" >
+				<small>* All Fields Are Required!</small>
 					<form onSubmit={this.onSubmit} className="row" noValidate>
 
-						<div className="col s12 input-field">
+						<div className={`col s12 input-field  ${errors.field === "email" ? "onErrorInput" : ""}`}>
 							<input 
 								onChange={this.onChange} 
 								id="email" 
@@ -72,10 +80,10 @@ class Login extends Component {
 								name="email" 
 								value={email} 
 							/>
-							<label htmlFor="email">Email</label>
+							<label htmlFor="email">{errors.field === "email" ? errors.message : "Email *"}</label>
 						</div>
 
-            <div className="col s12 input-field">
+            <div className={`col s12 input-field  ${errors.field === "password" ? "onErrorInput" : ""}`}>
               <input
                 onChange={this.onChange}
                 id="password"
@@ -83,7 +91,7 @@ class Login extends Component {
                 name="password"
                 value={password}
               />
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">{errors.field === "password" ? errors.message : "Password *"}</label>
             </div>
 						{ content }
 					</form>
@@ -94,6 +102,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => ({
+	auth: state.auth,
 	errors: state.errors
 });
 

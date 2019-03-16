@@ -19,9 +19,12 @@ $x-large: 1500px;
 /*Medium Screens > 1024px*/
 @import '../components/layout/navbar/scss/navbarMedium';
 
+//Authentication
+@import '../components/authentication/Auth.scss';
+
 //Products 
-@import '../components/main/products/scss/Products';
+@import '../components/products/scss/Products';
 /*Large Screens > 1200px */
-@import '../components/main/products/scss/productsLarge';
+@import '../components/products/scss/productsLarge';
 /*Extra Large Screens > 1500px */
-@import '../components/main/products/scss/productsXLarge';
+@import '../components/products/scss/productsXLarge';

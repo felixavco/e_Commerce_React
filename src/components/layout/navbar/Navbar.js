@@ -6,6 +6,8 @@ import BottomNav from './BottomNav';
 //Redux
 import { connect } from 'react-redux';
 import { logoutUser } from '../../../redux/actions/authActions';
+import { searchingProduct } from '../../../redux/actions/productsAction';
+import { getTotalAmount, getProdInCart } from '../../../redux/actions/shoppingCartActions';
 
 class Navbar extends Component {
   constructor(props) {
@@ -13,8 +15,10 @@ class Navbar extends Component {
     this.state = {
       isAuth: this.props.auth.isAuthenticated,
       isMenuActive: false,
-      isSearch: false,
+      isSearch: true,
       bagCount: 0,
+      total: 0,
+      searchText: "",
     }
   }
 
@@ -25,14 +29,40 @@ class Navbar extends Component {
         isAuth: nextProps.auth.isAuthenticated,
       });
     }
+
+    if (nextProps.totalAmount) {
+      this.setState({total: nextProps.totalAmount});
+    }
+
+    if(nextProps.qtyAllProd) {
+      this.setState({bagCount: nextProps.qtyAllProd})
+    }
+
   };
 
+  componentDidMount() {
+    this.props.getTotalAmount();
+    this.props.getProdInCart();
+  }
+
   closeMenu = () => this.setState({isMenuActive: false});
+
   openMenu = () => this.setState({isMenuActive: true});
-  toggleSearch = () => this.setState({isSearch: !this.state.isSearch})
+
+  toggleSearch = () => this.setState({isSearch: !this.state.isSearch});
+
+  onChange = (e) => {
+    this.setState({[e.target.name]: e.target.value}, () => {
+      this.onSearch(this.state.searchText);
+    });
+  }
+
+  onSearch = (search) => {
+      this.props.searchingProduct(search);
+  }
 
   render() {
-    const { isAuth, isMenuActive, bagCount, isSearch } = this.state;
+    const { isAuth, isMenuActive, bagCount, isSearch, searchText, total } = this.state;
     const { name } = this.props.auth.user;
     return (
       <header>
@@ -44,12 +74,15 @@ class Navbar extends Component {
             closeMenu={this.closeMenu}
             bagCount={bagCount}
             logout={this.props.logoutUser}
+            totalAmount={total}
           />
 
           <BottomNav 
             closeMenu={this.closeMenu}
             isSearch={isSearch}
             toggleSearch={this.toggleSearch}
+            searchText={searchText}
+            onChange={this.onChange}
           />
         </div>
         <div onClick={this.openMenu} className="open-menu">
@@ -61,7 +94,9 @@ class Navbar extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  totalAmount: state.shoppingCart.totalAmount,
+  qtyAllProd: state.shoppingCart.qtyAllProd
 })
 
-export default connect(mapStateToProps, { logoutUser })(Navbar);
+export default connect(mapStateToProps, { logoutUser, searchingProduct, getTotalAmount, getProdInCart })(Navbar);

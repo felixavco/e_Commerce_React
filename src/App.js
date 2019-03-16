@@ -14,12 +14,18 @@ import jwt_decode from 'jwt-decode';
 // Layout Components
 import Navbar from './components/layout/navbar/Navbar';
 import Footer from './components/layout/Footer';
-import AllProducts from './components/main/products/AllProducts';
-
+//Products Components
+import AllProducts from './components/products/AllProducts';
+import SingleProduct from './components/products/SingleProduct';
 //Authentication Components
 import Login from './components/authentication/Login';
 import Register from './components/authentication/Register';
+import PrivateRoute from './components/authentication/PrivateRoute';
 import { logoutUser, setCurrentUser } from './redux/actions/authActions';
+//Customer Componets 
+import Profile from './components/customer/Profile';
+//Shopping Cart Components 
+import MyBag from './components/shoppingCart/MyBag';
 
 //Checks if there is a token stored in LocalStorage
 if(localStorage.jwtToken) {
@@ -49,9 +55,13 @@ class App extends Component {
           <Fragment>
             <Navbar />
               <Switch>
-                <Route exact path="/" component={AllProducts} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
+                <Route exact path="/" component={AllProducts} />
+                <Route exact path="/product/:productId" component={SingleProduct} />
+                <Route exact path="/my-bag" component={MyBag} />
+                {/* Private Routes */}
+                <PrivateRoute exact path="/profile" component={Profile} />
               </Switch>
             <Footer/>
           </Fragment>

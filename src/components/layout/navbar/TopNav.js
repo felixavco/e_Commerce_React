@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 
-
 class TopNav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isDropdownActive: false
+      isDropdownActive: false,
     }
   }
 
@@ -15,7 +14,7 @@ class TopNav extends Component {
   }
 
   render() {
-    const { isAuth, name, closeMenu, bagCount, logout } = this.props;
+    const { isAuth, name, closeMenu, bagCount, logout, totalAmount } = this.props;
     const { isDropdownActive } = this.state;
     let content;
     let bagItems = "";
@@ -24,10 +23,11 @@ class TopNav extends Component {
         <h6 className="dropdown-cont">
           Hi!&nbsp;
           <span onClick={this.showDropdown} style={{cursor: "pointer"}}>
-            {name} <i class="fas fa-caret-down" />
+            {name} <i className="fas fa-caret-down" />
           </span> 
           <ul className={`my-dropdown ${isDropdownActive ? "dropDown-active" : ""}`}>
             <li><Link to="/my-bag">My Bag</Link></li>
+            <li><Link to="/profile">My Profile</Link></li>
             <li><Link onClick={logout} to="/login">Logout</Link></li>
           </ul>
         </h6>
@@ -59,14 +59,16 @@ class TopNav extends Component {
           </div>
   
           <div>
-            <h6 className="topBag">
-              <span className="bag-container">  
-                <i className="fas fa-shopping-bag"/>
-                {bagItems}
-              </span>
-              &nbsp;
-              Your Bag: <span>$250.00</span>
-            </h6>
+            <Link to="my-bag">
+              <h6 className="topBag">
+                <span className="bag-container">  
+                  <i className="fas fa-shopping-bag"/>
+                  {bagItems}
+                </span>
+                &nbsp;
+                Your Bag: <span>${totalAmount === null ? "0.00" : totalAmount}</span>
+              </h6>
+            </Link>
           </div>
   
       </div>

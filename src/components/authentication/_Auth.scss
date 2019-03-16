@@ -1,0 +1,86 @@
+.register, .login {
+  box-shadow: 0 0 10px #8f8f8f;
+  padding: 1.5rem;
+  margin: 2rem auto;
+  transition: box-shadow 250ms linear;
+  &:hover {
+    box-shadow: 0 0 25px #8f8f8f;
+  }
+
+  h3 {
+    color: $textPrimary;
+  }
+  small {
+    color: #9e9e9e;
+  }
+
+  .onError {
+    color: red;
+    font-size: 1rem;
+    transition: all 200ms linear;
+  }
+
+  .onErrorAll {
+     /* label underline focus color */
+    .input-field input {
+      border-bottom: 0px solid red;
+      box-shadow: 0 1px 0 0 red;
+    }
+
+      /* label color */
+    .input-field label {
+      color: red;
+    }
+  }
+
+  .onErrorInput {
+    input {
+      border-bottom: 0px solid red;
+      box-shadow: 0 1px 0 0 red;
+    }
+
+    input + label {
+      color: red;
+    }
+  }
+
+  /* label color */
+  .input-field label {
+    color: $textPrimary;
+  }
+  /* label focus color */
+  .input-field input[type=text]:focus + label {
+    color: #8a8a8a;
+  }
+
+  .input-field input[type=email]:focus + label {
+    color: #8a8a8a;
+  }
+
+  .input-field input[type=password]:focus + label {
+    color: #8a8a8a;
+  }
+
+  /* label underline focus color */
+  .input-field input[type=text]:focus {
+    border-bottom: 1px solid $textPrimary;
+    box-shadow: 0 1px 0 0 $textPrimary;
+  }
+
+   /* label underline focus color */
+   .input-field input[type=email]:focus {
+    border-bottom: 1px solid $textPrimary;
+    box-shadow: 0 1px 0 0 $textPrimary;
+  }
+
+   /* label underline focus color */
+   .input-field input[type=password]:focus {
+    border-bottom: 1px solid $textPrimary;
+    box-shadow: 0 1px 0 0 $textPrimary;
+  }
+
+  .btn {
+    background-color: $primary;
+  }
+
+}
