@@ -6,21 +6,21 @@
 	height: 235px;
 	max-height: 235px;
 	max-width: 475px;
-  transition: all 200ms linear;
-  margin-bottom: 1.5rem;
+	transition: all 200ms linear;
+	margin-bottom: 1.5rem;
 
-  h5 {
-    padding-top: 1rem;
-  }
-  
-  &:hover {
-    box-shadow: 0px 0px 15px $textPrimary;
-  }
+	h5 {
+		padding-top: 1rem;
+	}
+
+	&:hover {
+		box-shadow: 0px 0px 15px $textPrimary;
+	}
 
 	.cont {
 		display: flex;
-    flex-direction: row;
-    
+		flex-direction: row;
+
 		.img-cont {
 			display: flex;
 			align-items: center;
@@ -37,17 +37,17 @@
 
 			.reg-price,
 			.disc-price {
-        color: $textSecondary;
-        background-color: $primary;
-        padding: 0.2rem 0.4rem;
-        border-radius: 0.3rem;
+				color: $textSecondary;
+				background-color: $primary;
+				padding: 0.2rem 0.4rem;
+				border-radius: 0.3rem;
 				font-weight: 600;
 				font-size: 1.2rem;
-      }
-      
-      .reg-price {
-        margin-left: 63%;
-      }
+			}
+
+			.reg-price {
+				margin-left: 63%;
+			}
 
 			.x-price {
 				color: red;
@@ -65,17 +65,17 @@
 			margin-top: 1rem;
 			display: flex;
 			align-items: center;
-      justify-content: space-between;
-      padding: 0 2rem 0 0.7rem;
-      a {
-        color: $primary;
-      }
-    }
-    
-    .description {
-      margin-top: -1rem;
-      padding: 0.3rem;
-    }
+			justify-content: space-between;
+			padding: 0 2rem 0 0.7rem;
+			a {
+				color: $primary;
+			}
+		}
+
+		.description {
+			margin-top: -1rem;
+			padding: 0.3rem;
+		}
 	}
 }
 
@@ -83,9 +83,64 @@
   Styles for Products.js 
 */
 .products {
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
+/*Pagination */
+.pagination {
+	display: flex;
+	justify-content: center;
+	li.active {
+		background-color: $primary;
+	}
+}
 
+.categoryNav-cont {
+	.categoriesNav {
+		h5 {
+			text-align: center;
+		}
 
+		ul {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			li {
+				a {
+					display: block;
+					width: 100%;
+					padding-left: 0.5rem;
+					color: $textPrimary;
+					border-bottom: 2px solid transparent;
+				}
+			}
+		}
+		.cat-active {
+			color: $primary;
+			border-bottom: 2px solid $primary;
+		}
+	}
+}
+
+@media (min-width: 992px) {
+	.categoryNav-cont {
+		.categoriesNav {
+			position: fixed;
+			ul {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				li {
+					a {
+						padding-left: 1rem;
+						margin-bottom: 1rem;
+						color: $textPrimary;
+						font-size: 1.2rem;
+						border-bottom: 2px solid transparent;
+					}
+				}
+			}
+		}
+	}
+}

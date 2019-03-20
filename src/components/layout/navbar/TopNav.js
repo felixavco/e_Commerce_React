@@ -9,9 +9,8 @@ class TopNav extends Component {
     }
   }
 
-  showDropdown = () => {
-    this.setState({ isDropdownActive: ! this.state.isDropdownActive })
-  }
+  showDropdown = () => this.setState({ isDropdownActive: ! this.state.isDropdownActive });
+  closeDropdown = () => this.setState({ isDropdownActive: false });
 
   render() {
     const { isAuth, name, closeMenu, bagCount, logout, totalAmount } = this.props;
@@ -25,10 +24,10 @@ class TopNav extends Component {
           <span onClick={this.showDropdown} style={{cursor: "pointer"}}>
             {name} <i className="fas fa-caret-down" />
           </span> 
-          <ul className={`my-dropdown ${isDropdownActive ? "dropDown-active" : ""}`}>
-            <li><Link to="/my-bag">My Bag</Link></li>
-            <li><Link to="/profile">My Profile</Link></li>
-            <li><Link onClick={logout} to="/login">Logout</Link></li>
+          <ul onMouseLeave={this.closeDropdown} className={`my-dropdown ${isDropdownActive ? "dropDown-active" : ""}`}>
+            <li onClick={this.showDropdown}><Link to="/my-bag">My Bag</Link></li>
+            <li onClick={this.showDropdown}><Link to="/profile">My Profile</Link></li>
+            <li onClick={this.showDropdown}><Link onClick={logout} to="/login">Logout</Link></li>
           </ul>
         </h6>
       )

@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import MainNav from './navbar/MainNav';
+import { Link } from 'react-router-dom';
 
 class Footer extends Component {
   render() {
     return (
       <footer>
-        <div className="top-footer">
-          <h5>subscribe</h5> 
-        </div>
-        <div className="bottom-footer container">
+        <div className="container">
           <MainNav />
+
           <div className="social-media">
             <ul>
               <li><a href="https://www.instagram.com/" rel="noopener noreferrer" target="_blank"><i className="fab fa-instagram"/></a></li>
@@ -18,11 +17,14 @@ class Footer extends Component {
               <li><a href="https://www.facebook.com/me" rel="noopener noreferrer" target="_blank"><i className="fab fa-facebook-f"/></a></li>
             </ul>
           </div>
-          <div>
+
+          <div className="copy-rights">
             <ul>
-              <li><a href="/">&copy;{new Date().getFullYear()} shopmate Ltd &diams;</a></li>
-              <li><a href="/">Contact &diams;</a></li>
-              <li><a href="/">Privacy policy</a></li>
+              <li><Link to="/">&copy;{new Date().getFullYear()} Shopmate Ltd</Link></li>
+              &nbsp;
+              <li><Link to="/">Contact</Link></li>
+              &nbsp;
+              <li><Link to="/">Privacy policy</Link></li>
             </ul>
           </div>
         </div>

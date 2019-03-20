@@ -1,6 +1,7 @@
 import { 
   GET_TOTAL_AMOUNT, 
-  GET_PROD_IN_CART
+  ADD_PROD_IN_CART, 
+  CLEAR_CART
 } from '../actions/types'
 
 const initialState = {
@@ -18,12 +19,20 @@ export default (state = initialState, action) => {
         totalAmount: action.payload
       }
 
-    case GET_PROD_IN_CART:
+    case ADD_PROD_IN_CART:
       let total = 0;
       action.payload.forEach(item => total += item.quantity);
       return {
         ...state, 
         qtyAllProd: total,
+        productsInCart: action.payload
+      }
+
+    case CLEAR_CART:
+      return {
+        ...state, 
+        qtyAllProd: 0,
+        totalAmount: 0,
         productsInCart: action.payload
       }
       

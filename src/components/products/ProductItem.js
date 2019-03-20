@@ -1,12 +1,23 @@
 import React from 'react';
 import { baseURL } from '../../config/config';
-import { Link } from 'react-router-dom';
-// import { connect } from 'react-redux'
-// import { addProdToChart } from '../../redux/actions/shoppingCartActions';
+import { connect } from 'react-redux';
+import { addProdToChart, getTotalAmount } from '../../redux/actions/shoppingCartActions';
+import { getSingleProduct, getProdAttr } from '../../redux/actions/productsAction';
 const productImagesURL = baseURL + '/images/products/';
 
-const ProductItem = ({ product, addToChart }) => {
+const ProductItem = ({ product, addProdToChart, getTotalAmount, getSingleProduct, getProdAttr }) => {
 	const { product_id, name, description, price, discounted_price, thumbnail } = product;
+
+	const addToChart = (id) => {
+		addProdToChart(id);
+		getTotalAmount();
+	};
+
+	const getProduct = (e, id) => {
+		e.preventDefault();
+		getSingleProduct(id);
+		getProdAttr(id);
+	};
 
 	return (
 		<div className="product-item">
@@ -14,22 +25,26 @@ const ProductItem = ({ product, addToChart }) => {
 
 			<div className="cont">
 				<div className="img-cont">
-					<Link to={'/product/' + product_id}>
+					<a onClick={(e) => getProduct(e, product_id)} href="#!">
 						<img src={productImagesURL + thumbnail} alt={name} />
-					</Link>
+					</a>
 				</div>
 				<div className="content">
 					<div className="price">
 						<span className={discounted_price === '0.00' ? 'reg-price' : 'x-price'}>${price}</span>
-						&nbsp;
-            &nbsp;
+						&nbsp; &nbsp;
 						<span className={discounted_price === '0.00' ? 'hide-price' : 'disc-price'}>
 							${discounted_price}
 						</span>
 					</div>
 					<div className="actions">
-						<Link to={'/product/' + product_id}><i className="far fa-plus-square"/> See Details...</Link>
-						<button onClick={() => addToChart(product_id)} className="btn-floating btn waves-effect waves-light red">
+						<a onClick={(e) => getProduct(e, product_id)} href="#!">
+							<i className="far fa-plus-square" /> See Details...
+						</a>
+						<button
+							onClick={() => addToChart(product_id)}
+							className="btn-floating btn waves-effect waves-light red"
+						>
 							<i className="small material-icons">add_shopping_cart</i>
 						</button>
 					</div>
@@ -42,4 +57,4 @@ const ProductItem = ({ product, addToChart }) => {
 	);
 };
 
-export default ProductItem;
+export default connect(null, { addProdToChart, getTotalAmount, getSingleProduct, getProdAttr })(ProductItem);

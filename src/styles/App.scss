@@ -10,13 +10,15 @@ $medium: 1024px;
 $large: 1200px;
 $x-large: 1500px;
 
+//General Styles
+@import './general.scss';
 //Navbar
 @import '../components/layout/navbar/scss/Navbar.scss';
 /*Landscape > 500px*/
 @import '../components/layout/navbar/scss/navbarLandscape';
 /*Tablet > 750px*/
 @import '../components/layout/navbar/scss/navbarTablet';
-/*Medium Screens > 1024px*/
+/*Medium Screens > 1024px */
 @import '../components/layout/navbar/scss/navbarMedium';
 
 //Authentication
@@ -28,3 +30,11 @@ $x-large: 1500px;
 @import '../components/products/scss/productsLarge';
 /*Extra Large Screens > 1500px */
 @import '../components/products/scss/productsXLarge';
+/*Single Product */
+@import '../components/products/scss/singleProduct';
+
+//Customer Profile 
+@import '../components/customer/scss/Profile';
+
+//Footer 
+@import '../components/layout/scss/footer'

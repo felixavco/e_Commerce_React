@@ -4,6 +4,9 @@ header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	z-index: 100;
+	position: fixed;
+	width: 100%;
 
 	.brand2 {
 		display: inline;
@@ -23,12 +26,7 @@ header {
 		width: 100%;
 		padding-top: 1rem;
 		transition: left 300ms ease-in-out;
-
-		nav {
-			background: transparent;
-			box-shadow: none;
-		}
-
+		
 		.topNav {
 			h6 {
 				color: $textSecondary;
@@ -99,6 +97,7 @@ header {
 				padding: 0.7rem;
 				a {
 					font-size: 1.1rem;
+					color: $textSecondary;
 				}
 			}
 
@@ -154,14 +153,18 @@ header {
 					margin-top: 2rem;
 					a {
 						font-size: 1.5rem;
+						color: $textSecondary;
 					}
 
 					li:hover {
 						a {
 							color: $primary;
-							font-weight: 700;
 						}
 					}
+				}
+
+				.mainNav-active {
+					color: $primary;
 				}
 			}
 
@@ -185,6 +188,7 @@ header {
 
 	.menuActive {
 		left: 0;
+		z-index: 100;
 	}
 }
 

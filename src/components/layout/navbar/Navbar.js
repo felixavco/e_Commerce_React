@@ -6,7 +6,7 @@ import BottomNav from './BottomNav';
 //Redux
 import { connect } from 'react-redux';
 import { logoutUser } from '../../../redux/actions/authActions';
-import { searchingProduct } from '../../../redux/actions/productsAction';
+import { searchingProduct, getDeparments } from '../../../redux/actions/productsAction';
 import { getTotalAmount, getProdInCart } from '../../../redux/actions/shoppingCartActions';
 
 class Navbar extends Component {
@@ -43,6 +43,7 @@ class Navbar extends Component {
   componentDidMount() {
     this.props.getTotalAmount();
     this.props.getProdInCart();
+    this.props.getDeparments();
   }
 
   closeMenu = () => this.setState({isMenuActive: false});
@@ -99,4 +100,4 @@ const mapStateToProps = state => ({
   qtyAllProd: state.shoppingCart.qtyAllProd
 })
 
-export default connect(mapStateToProps, { logoutUser, searchingProduct, getTotalAmount, getProdInCart })(Navbar);
+export default connect(mapStateToProps, { logoutUser, searchingProduct, getTotalAmount, getProdInCart, getDeparments })(Navbar);
