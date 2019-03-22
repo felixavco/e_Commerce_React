@@ -36,5 +36,8 @@ $x-large: 1500px;
 //Customer Profile 
 @import '../components/customer/scss/Profile';
 
+//My Bag
+@import '../components/shoppingCart/scss/myBag';
+
 //Footer 
 @import '../components/layout/scss/footer'

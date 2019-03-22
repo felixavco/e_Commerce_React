@@ -19,6 +19,10 @@ class AddToCart extends Component {
 				sizes: nextProps.prod_attributes.filter((attr) => attr.attribute_name === 'Size'),
 			});
 		}
+
+		if(nextProps.qtyAllProd !== this.props.qtyAllProd) {
+			this.props.getTotalAmount();
+		}
 	}
 
 	onChange = (e) => this.setState({ [e.target.name]: e.target.value });
@@ -30,7 +34,6 @@ class AddToCart extends Component {
 		const attributes = `Color: ${color}, Size: ${size}`;
 		this.props.addProdToChart(product_id, attributes);
 		this.closeModal();
-		this.props.getTotalAmount();
 	};
 
 	closeModal = () => {
@@ -60,7 +63,8 @@ class AddToCart extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	prod_attributes: state.products.prod_attributes
+	prod_attributes: state.products.prod_attributes, 
+	qtyAllProd: state.shoppingCart.qtyAllProd
 });
 
 export default connect(mapStateToProps, { addProdToChart, clearSingleProduct, getTotalAmount })(AddToCart);

@@ -1,0 +1,75 @@
+.my-bag {
+	margin: 3rem auto;
+	.header {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 2.5rem;
+		margin-bottom: 1.5rem;
+
+		.btn {
+			background: $primary;
+		}
+
+		h5 {
+			font-weight: bold;
+			color: $primary;
+			text-shadow: 1px 1px 1px #333;
+		}
+	}
+
+	table {
+		thead {
+			font-size: 1.2rem;
+		}
+
+		tbody {
+			font-size: 1.2rem;
+
+			.update-btn {
+				margin: 0 0.75rem;
+				padding: 0.5rem;
+				color: $textSecondary;
+				background: $primary;
+				cursor: pointer;
+				font-size: 1rem;
+				border-radius: 0.3rem;
+			}
+		}
+  }
+  
+	.cart-emtpy {
+    margin: 3rem 0;
+		h2,
+		h4 {
+      text-align: center;
+      margin-bottom: 1rem;
+		}
+
+		h5,
+		hr {
+			display: none;
+		}
+
+		ul {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      li {
+        text-align: center;
+        margin-bottom: 0.5rem;
+        a {
+          color: $textPrimary;
+          font-size: 1.5rem;
+          border-bottom: 1px solid transparent;
+          transition: all 200ms linear;
+  
+          &:hover {
+            border-bottom: 1px solid $textPrimary;
+          }
+        }
+      }
+		
+		}
+  }
+
+}

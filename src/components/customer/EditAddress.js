@@ -108,12 +108,12 @@ class EditAddress extends Component {
 					<div className="save-btn-cont">
 						<button onClick={closeEditMode} className="btn">
 							Cancel&nbsp;
-							<i class="fas fa-times" />
+							<i className="fas fa-times" />
 						</button>
 
 						<button className="btn save-btn">
 							Save&nbsp;
-							<i class="far fa-save" />
+							<i className="far fa-save" />
 						</button>
 					</div>
 				</form>

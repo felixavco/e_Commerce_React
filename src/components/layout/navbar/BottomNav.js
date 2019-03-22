@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import MainNav from './MainNav';
 
-const BottomNav = ({ closeMenu, isSearch, toggleSearch, searchText, onChange }) => {
+const BottomNav = ({ closeMenu, isSearch, toggleSearch, searchText, onChange, onKeyDown, onKeyUp }) => {
 
 	return (
 		<div className="bottomNav">
@@ -19,6 +19,8 @@ const BottomNav = ({ closeMenu, isSearch, toggleSearch, searchText, onChange }) 
 				<input 
 					className={isSearch ? "input-active" : ""} 
 					onChange={onChange}
+					onKeyUp={(e) => onKeyUp(e)}
+					onKeyDown={onKeyDown}
 					type="text" 
 					name="searchText" 
 					id="search" 

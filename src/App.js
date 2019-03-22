@@ -18,6 +18,7 @@ import Footer from './components/layout/Footer';
 import AllProducts from './components/products/AllProducts';
 import Department from './components/products/Department';
 import Category from './components/products/Category';
+import SearchResults from './components/products/SearchResults';
 //Authentication Components
 import Login from './components/authentication/Login';
 import Register from './components/authentication/Register';
@@ -27,6 +28,7 @@ import { logoutUser, setCurrentUser } from './redux/actions/authActions';
 import Profile from './components/customer/Profile';
 //Shopping Cart Components
 import MyBag from './components/shoppingCart/MyBag';
+import Checkout from './components/shoppingCart/Checkout/Checkout';
 
 //Checks if there is a token stored in LocalStorage
 if (localStorage.jwtToken) {
@@ -55,19 +57,21 @@ class App extends Component {
 				<Router>
 					<Fragment>
 						<Navbar />
-						<div id="main">
-							<Switch>
-								<Route exact path="/login" component={Login} />
-								<Route exact path="/register" component={Register} />
-								<Route exact path="/my-bag" component={MyBag} />
-								<Route exact path="/" component={AllProducts} />
-								<Route exact path="/deparment/:deptId" component={Department} />
-								<Route exact path="/category/:catId" component={Category} />
-								{/* Private Routes */}
-								<PrivateRoute exact path="/profile" component={Profile} />
-							</Switch>
-							<Footer />
-						</div>
+							<div id="main">
+								<Switch>
+									<Route exact path="/login" component={Login} />
+									<Route exact path="/register" component={Register} />
+									<Route exact path="/my-bag" component={MyBag} />
+									<Route exact path="/" component={AllProducts} />
+									<Route exact path="/search-results" component={SearchResults} />
+									<Route exact path="/deparment/:deptId" component={Department} />
+									<Route exact path="/category/:catId" component={Category} />
+									<Route exact path="/checkout" component={Checkout} />
+									{/* Private Routes */}
+									<PrivateRoute exact path="/profile" component={Profile} />
+								</Switch>
+							</div>
+						<Footer />
 					</Fragment>
 				</Router>
 			</Provider>

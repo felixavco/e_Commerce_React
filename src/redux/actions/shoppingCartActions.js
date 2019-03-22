@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_ERRORS, GET_TOTAL_AMOUNT, ADD_PROD_IN_CART, CLEAR_CART } from './types';
+import { GET_ERRORS, GET_TOTAL_AMOUNT, ADD_PROD_IN_CART, CLEAR_CART, GET_SHIPPING_OPTIONS, GET_TAXES } from './types';
 import { baseURL } from '../../config/config';
 
 //Get a unique Cart ID if there is no Cart id in localstorage
@@ -20,7 +20,7 @@ export const getCartId = () => (dispatch) => {
 };
 
 //Add Product to Cart (Bag)
-export const addProdToChart = (prodId, attr = ' ') => (dispatch) => {
+export const addProdToChart = (prodId, attr) => (dispatch) => {
 	const cartId = localStorage.turingShoppingCart;
 	const data = {
 		cart_id: cartId,
@@ -44,15 +44,44 @@ export const addProdToChart = (prodId, attr = ' ') => (dispatch) => {
 		});
 };
 
-export const updateItemInCart = (itemId, qty) => dispatch => {
+export const updateItemInCart = (itemId, qty, callback) => dispatch => {
 	 
 	axios
 		.put(baseURL + "/shoppingcart/update/" + itemId, {quantity: qty})
-		.then(console.log("OK"))
+		.then(() => callback())
 		.catch(err => {
 			dispatch({
 				type: GET_ERRORS, 
 				payload: "Error updating product"
+			})
+		})
+}
+
+export const removeItemInCart = (itemId, callback) => dispatch => {
+	axios
+		.delete(baseURL + "/shoppingcart/removeProduct/" + itemId)
+		.then(() => callback())
+		.catch(err => {
+			dispatch({
+				type: GET_ERRORS, 
+				payload: "Error removing Item from Cart"
+			})
+		})
+}
+
+export const getShippingOptions = (shipping_region_id) => dispatch => {
+	axios
+		.get(baseURL + "/shipping/regions/" + shipping_region_id)
+		.then(res => {
+			dispatch({
+				type: GET_SHIPPING_OPTIONS, 
+				payload: res.data
+			})
+		})
+		.catch(err => {
+			dispatch({
+				type: GET_ERRORS, 
+				payload: "Error feching shipping options"
 			})
 		})
 }
@@ -114,5 +143,23 @@ export const clearCart = () => (dispatch) => {
 			});
 		});
 };
+
+export const getTaxes = () => (dispatch) => {
+	axios
+		.get(baseURL + "/tax")
+		.then(res => {
+			dispatch({
+				type: GET_TAXES, 
+				payload: res.data
+			})
+		})
+		.catch(err => {
+			dispatch({
+				type: GET_ERRORS, 
+				payload: "Error feching taxes"
+			})
+		})
+}
+
 
 

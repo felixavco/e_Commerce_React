@@ -1,17 +1,16 @@
 import {
 	GET_ALL_PRODUCTS,
 	GET_PRODUCT,
-	SEARCHING_PRODUCTS,
 	GET_PRODUCT_REVIEWS,
   GET_DEPARMENTS,
   GET_CATEGORIES, 
 	GET_PRODUCTS_IN_DEPARTMENT,
-	GET_PRODUCTS_IN_CATEGORY,
 	GET_CATEGORIES_IN_DEPARTMENT,
 	SET_DEPT_ID, 
 	SET_CAT_ID,
 	GET_PROD_ATTR, 
-	CLEAR_PRODUCT
+	CLEAR_PRODUCT, 
+	SET_SEARCH_QUERY
 } from '../actions/types';
 
 const initialState = {
@@ -19,12 +18,12 @@ const initialState = {
 	singleProduct: {},
 	prod_attributes: [],
 	totalProducts: 0,
-	searchQuery: '',
-	ProductReviews: [],
+	productReviews: [],
   deparments: [], 
 	categories: {}, 
 	deparment_id: 1,
-	category_id: 1
+	category_id: 1,
+	searchQuery: ''
 };
 
 export default (state = initialState, action) => {
@@ -43,19 +42,6 @@ export default (state = initialState, action) => {
 				totalProducts: action.payload.count.count
 			};
 
-		case GET_PRODUCTS_IN_CATEGORY:
-			return {
-				...state,
-				allProducts: action.payload.rows,
-				totalProducts: action.payload.count
-			};
-
-		case SEARCHING_PRODUCTS:
-			return {
-				...state,
-				searchQuery: action.payload
-			};
-
 		case GET_PRODUCT:
 			return {
 				...state,
@@ -65,7 +51,7 @@ export default (state = initialState, action) => {
 		case GET_PRODUCT_REVIEWS:
 			return {
 				...state,
-				ProductReviews: action.payload
+				productReviews: action.payload
       };
       
     case GET_DEPARMENTS:
@@ -102,6 +88,12 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				prod_attributes: action.payload
+			};
+
+    case SET_SEARCH_QUERY:
+			return {
+				...state,
+				searchQuery: action.payload
 			};
 			
     case CLEAR_PRODUCT:

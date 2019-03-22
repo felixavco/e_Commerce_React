@@ -3,18 +3,16 @@ import {
 	GET_ERRORS,
 	SET_DEPT_ID,
 	GET_ALL_PRODUCTS,
-	SEARCHING_PRODUCTS,
 	GET_PRODUCT,
 	GET_PRODUCT_REVIEWS,
-  GET_DEPARMENTS, 
-  GET_CATEGORIES,  
-	GET_PRODUCTS_IN_DEPARTMENT, 
-	GET_CATEGORIES_IN_DEPARTMENT, 
-	GET_PRODUCTS_IN_CATEGORY,
-	SET_CAT_ID, 
+	GET_DEPARMENTS,
+	GET_CATEGORIES,
+	GET_PRODUCTS_IN_DEPARTMENT,
+	GET_CATEGORIES_IN_DEPARTMENT,
+	SET_CAT_ID,
 	GET_PROD_ATTR,
-	CLEAR_PRODUCT
-
+	CLEAR_PRODUCT,
+	SET_SEARCH_QUERY
 } from './types';
 import { baseURL } from '../../config/config';
 
@@ -47,55 +45,80 @@ export const getProducts = ({ page, limit, descLen }) => (dispatch) => {
  * Protected: False
  * Desc: Returns array of products in a Department 
  */
-export const getProductsInDept = (deptId, { page, limit, descLen }) => dispatch => {
-  axios
-    .get(`${baseURL}/products/inDepartment/${deptId}/?page=${page}&limit=${limit}&description_length=${descLen}`)
-    .then(res => {
-      dispatch({
-        type: GET_PRODUCTS_IN_DEPARTMENT, 
-        payload: res.data
-      })
-    })
-    .catch(err => {
-      dispatch({
-        type: GET_ERRORS, 
-        payload: "error: Fechching Products in Department"
-      })
-    })
-}
+export const getProductsInDept = (deptId, { page, limit, descLen }) => (dispatch) => {
+	axios
+		.get(`${baseURL}/products/inDepartment/${deptId}/?page=${page}&limit=${limit}&description_length=${descLen}`)
+		.then((res) => {
+			dispatch({
+				type: GET_PRODUCTS_IN_DEPARTMENT,
+				payload: res.data
+			});
+		})
+		.catch((err) => {
+			dispatch({
+				type: GET_ERRORS,
+				payload: 'error: Fechching Products in Department'
+			});
+		});
+};
 
 /**
  * Method: GET
  * Protected: False
  * Desc: Returns array of products in a category
  */
-export const getProductsinCat = (CatId, { page, limit, descLen }) => dispatch => {
-  axios
-    .get(`${baseURL}/products/inCategory/${CatId}/?page=${page}&limit=${limit}&description_length=${descLen}`)
-    .then(res => {
-      dispatch({
-        type: GET_PRODUCTS_IN_CATEGORY, 
-        payload: res.data
-      })
-    })
-    .catch(err => {
-      dispatch({
-        type: GET_ERRORS, 
-        payload: "error: Fechching Products in Department"
-      })
-    })
-}
+export const getProductsinCat = (CatId, { page, limit, descLen }) => (dispatch) => {
+	axios
+		.get(`${baseURL}/products/inCategory/${CatId}/?page=${page}&limit=${limit}&description_length=${descLen}`)
+		.then((res) => {
+			dispatch({
+				type: GET_ALL_PRODUCTS,
+				payload: res.data
+			});
+		})
+		.catch((err) => {
+			dispatch({
+				type: GET_ERRORS,
+				payload: 'error: Fechching Products in Department'
+			});
+		});
+};
 
 /**
  * Method: N/A
  * Protected: N/A
  * Desc: Sets the search query in the state (store)
  */
-export const searchingProduct = (search) => (dispatch) => {
+export const setSearchQuery = (search, history) => (dispatch) => {
 	dispatch({
-		type: SEARCHING_PRODUCTS,
+		type: SET_SEARCH_QUERY,
 		payload: search
 	});
+	history.push('/search-results');
+};
+
+/**
+ * Method: GET
+ * Protected: false
+ * Desc: returns an array of pruducts when searching
+ */
+export const searchProducts = ({ search, page, limit, descLen }) => (dispatch) => {
+	axios
+		.get(
+			`${baseURL}/products/search/?query_string=${search}&page=${page}&limit=${limit}&description_length=${descLen}`
+		)
+		.then((res) => {
+			dispatch({
+				type: GET_ALL_PRODUCTS,
+				payload: res.data
+			});
+		})
+		.catch((err) => {
+			dispatch({
+				type: GET_ERRORS,
+				payload: 'Error Loading products'
+			});
+		});
 };
 
 /**
@@ -151,20 +174,20 @@ export const getSingleProduct = (id) => (dispatch) => {
  */
 export const getProdAttr = (id) => (dispatch) => {
 	axios
-		.get(baseURL + "/attributes/inProduct/" + id)
-		.then(res => {
+		.get(baseURL + '/attributes/inProduct/' + id)
+		.then((res) => {
 			dispatch({
 				type: GET_PROD_ATTR,
 				payload: res.data
-			})
+			});
 		})
-		.catch(err => {
+		.catch((err) => {
 			dispatch({
-				type: GET_ERRORS, 
-				payload: "Error getting Attributes"
-			})
-		})
-}
+				type: GET_ERRORS,
+				payload: 'Error getting Attributes'
+			});
+		});
+};
 
 /**
  * Method: N/A
@@ -201,6 +224,24 @@ export const getProductReviews = (id) => (dispatch) => {
 };
 
 /**
+ * Method: POST
+ * Protected: True
+ * Desc: post a produc review
+ */
+export const postReview = (prodId, data) => dispatch => {
+	axios
+		.post(baseURL + `/products/${prodId}/reviews`, data)
+		.then(() => console.log("new review posted!"))
+		.catch(err => {
+			dispatch({
+				type: GET_ERRORS, 
+				payload: "ee"
+			})
+		})
+}
+
+
+/**
  * Method: GET
  * Protected: False
  * Desc: Returns an array with the available deparments
@@ -208,7 +249,7 @@ export const getProductReviews = (id) => (dispatch) => {
 export const getDeparments = () => (dispatch) => {
 	axios
 		.get(baseURL + '/departments')
-    .then((res) => {
+		.then((res) => {
 			dispatch({
 				type: GET_DEPARMENTS,
 				payload: res.data
@@ -227,43 +268,41 @@ export const getDeparments = () => (dispatch) => {
  * Protected: False
  * Desc: Returns an array with the available categories
  */
- export const getCategories = () => dispatch => {
-   axios
-    .get(baseURL + "/categories")
-    .then(res => {
-      dispatch({
-        type: GET_CATEGORIES, 
-        payload: res.data
-      })
-    })
-    .catch(err => { 
-      dispatch({
-        type: GET_ERRORS, 
-        payload: "Error loading categories"
-      })
-    })
- }
+export const getCategories = () => (dispatch) => {
+	axios
+		.get(baseURL + '/categories')
+		.then((res) => {
+			dispatch({
+				type: GET_CATEGORIES,
+				payload: res.data
+			});
+		})
+		.catch((err) => {
+			dispatch({
+				type: GET_ERRORS,
+				payload: 'Error loading categories'
+			});
+		});
+};
 
- /**
+/**
  * Method: GET
  * Protected: False
  * Desc: Returns an array with the category in a selected department based on department ID
  */
-export const getCategoriesInDept = (deptId) => dispatch => {
-  axios
-   .get(baseURL + "/categories/inDepartment/" + deptId)
-   .then(res => {
-     dispatch({
-       type: GET_CATEGORIES_IN_DEPARTMENT, 
-       payload: res.data
-     })
-   })
-   .catch(err => { 
-     dispatch({
-       type: GET_ERRORS, 
-       payload: "Error loading categories"
-     })
-   })
-}
-
-
+export const getCategoriesInDept = (deptId) => (dispatch) => {
+	axios
+		.get(baseURL + '/categories/inDepartment/' + deptId)
+		.then((res) => {
+			dispatch({
+				type: GET_CATEGORIES_IN_DEPARTMENT,
+				payload: res.data
+			});
+		})
+		.catch((err) => {
+			dispatch({
+				type: GET_ERRORS,
+				payload: 'Error loading categories'
+			});
+		});
+};

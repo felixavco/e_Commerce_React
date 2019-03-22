@@ -8,8 +8,8 @@ class Gallery extends Component {
 	onSelect = (e) => this.setState({ url: e.target.src });
 
 	render() {
-		const content = this.props.images.map((img) => (
-			<span>
+		const content = this.props.images.map((img, i) => (
+			<span key={i}>
 				<img onClick={this.onSelect} src={imgURL + img} alt="img"/>
 			</span>
 		));

@@ -10,8 +10,7 @@ const Attributes = ({ colors, sizes, onChange, picked_color, picked_size }) => {
 			<label
 				htmlFor={color.attribute_value}
 				style={{
-					backgroundColor: `${color.attribute_value.toLowerCase()}`,
-					color: `${color.attribute_value.toLowerCase()}`
+					backgroundColor: `${color.attribute_value.toLowerCase()}`
 				}}
 			/>
 			<input
@@ -25,10 +24,7 @@ const Attributes = ({ colors, sizes, onChange, picked_color, picked_size }) => {
 	));
 
 	const SIZES = sizes.map((size) => (
-		<li 
-			className={picked_size === size.attribute_value ? 'picked' : ''}
-			key={size.attribute_value_id}
-		>
+		<li className={picked_size === size.attribute_value ? 'picked' : ''} key={size.attribute_value_id}>
 			<label htmlFor={size.attribute_value}>{size.attribute_value}</label>
 			<input
 				onChange={(e) => onChange(e)}

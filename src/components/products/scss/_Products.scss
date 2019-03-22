@@ -4,10 +4,12 @@
 .product-item {
 	box-shadow: 0px 0px 5px $textPrimary;
 	height: 235px;
-	max-height: 235px;
+	max-height: 215px;
 	max-width: 475px;
 	transition: all 200ms linear;
 	margin-bottom: 1.5rem;
+	padding: 0 1.5rem;
+	cursor: pointer;
 
 	h5 {
 		padding-top: 1rem;
@@ -33,7 +35,6 @@
 		.price {
 			display: flex;
 			justify-content: flex-end;
-			padding-right: 2rem;
 
 			.reg-price,
 			.disc-price {
@@ -61,19 +62,8 @@
 			}
 		}
 
-		.actions {
-			margin-top: 1rem;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			padding: 0 2rem 0 0.7rem;
-			a {
-				color: $primary;
-			}
-		}
-
 		.description {
-			margin-top: -1rem;
+			margin-top: 1rem;
 			padding: 0.3rem;
 		}
 	}

@@ -1,10 +1,12 @@
 #main {
   padding-top: 70px;
+  min-height: cal(800px - 70px);
 }
 
 @media (min-width: $medium) {
   #main {
     padding-top: 120px;
+    min-height: cal(800px - 120px);
   }
 }
 

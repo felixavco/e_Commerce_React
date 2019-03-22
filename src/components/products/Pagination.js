@@ -2,13 +2,20 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 //Redux
 import { connect } from 'react-redux';
-import { getProducts, getProductsInDept, getProductsinCat } from '../../redux/actions/productsAction';
+import { getProducts, getProductsInDept, getProductsinCat, searchProducts } from '../../redux/actions/productsAction';
 
 class Pagination extends Component {
 	state = {
 		currentPage: 1,
 		pages: 0
 	};
+
+	componentWillReceiveProps = (nextProps) => {
+		if(nextProps.totalProducts !== this.props.totalProducts) {
+			this.setNumOfPages(nextProps.totalProducts);
+		}
+	}
+	
 
 	componentWillMount() {
 		this.setNumOfPages(this.props.totalProducts);
@@ -67,7 +74,7 @@ class Pagination extends Component {
 	//Loads the items on the selected page
 	loadPage = () => {
 		const { currentPage } = this.state;
-		const { itemsPerPage, descriptionLen, pagePath, deptId } = this.props;
+		const { itemsPerPage, descriptionLen, pagePath, deptId, search } = this.props;
 
 		const query = {
 			page: currentPage,
@@ -82,6 +89,11 @@ class Pagination extends Component {
 
 			case 'category':
 				this.props.getProductsinCat(deptId, query);
+				break;
+			
+			case 'search-results':
+				const data = {...query, search}
+				this.props.searchProducts(data);
 				break;
 
 			default:
@@ -133,7 +145,7 @@ Pagination.propTypes = {
 	itemsPerPage: PropTypes.number.isRequired,
 	descriptionLen: PropTypes.number.isRequired,
 	pagePath: PropTypes.string,
-	deptId: PropTypes.number
+	deptId: PropTypes.string
 };
 
 Pagination.defaultProps = {
@@ -145,4 +157,4 @@ const mapStateToProps = (state) => ({
 	totalProducts: state.products.totalProducts
 });
 
-export default connect(mapStateToProps, { getProducts, getProductsInDept, getProductsinCat })(Pagination);
+export default connect(mapStateToProps, { getProducts, getProductsInDept, getProductsinCat, searchProducts })(Pagination);

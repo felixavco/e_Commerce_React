@@ -58,7 +58,7 @@ class TopNav extends Component {
           </div>
   
           <div>
-            <Link to="my-bag">
+            <Link to="/my-bag">
               <h6 className="topBag">
                 <span className="bag-container">  
                   <i className="fas fa-shopping-bag"/>
