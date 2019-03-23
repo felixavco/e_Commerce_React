@@ -1,6 +1,16 @@
 import axios from 'axios';
-import { GET_ERRORS, GET_TOTAL_AMOUNT, ADD_PROD_IN_CART, CLEAR_CART, GET_SHIPPING_OPTIONS, GET_TAXES } from './types';
-import { baseURL } from '../../config/config';
+import {
+	GET_ERRORS,
+	GET_TOTAL_AMOUNT,
+	ADD_PROD_IN_CART,
+	CLEAR_CART,
+	GET_SHIPPING_OPTIONS,
+	GET_TAXES,
+	GET_ORDERS,
+	PLACE_ORDER,
+	SET_TOTAL_TO_PAY
+} from './types';
+import { baseURL, stripe_public_token } from '../../config/config';
 
 //Get a unique Cart ID if there is no Cart id in localstorage
 export const getCartId = () => (dispatch) => {
@@ -44,47 +54,40 @@ export const addProdToChart = (prodId, attr) => (dispatch) => {
 		});
 };
 
-export const updateItemInCart = (itemId, qty, callback) => dispatch => {
-	 
-	axios
-		.put(baseURL + "/shoppingcart/update/" + itemId, {quantity: qty})
-		.then(() => callback())
-		.catch(err => {
-			dispatch({
-				type: GET_ERRORS, 
-				payload: "Error updating product"
-			})
-		})
-}
+export const updateItemInCart = (itemId, qty, callback) => (dispatch) => {
+	axios.put(baseURL + '/shoppingcart/update/' + itemId, { quantity: qty }).then(() => callback()).catch((err) => {
+		dispatch({
+			type: GET_ERRORS,
+			payload: 'Error updating product'
+		});
+	});
+};
 
-export const removeItemInCart = (itemId, callback) => dispatch => {
-	axios
-		.delete(baseURL + "/shoppingcart/removeProduct/" + itemId)
-		.then(() => callback())
-		.catch(err => {
-			dispatch({
-				type: GET_ERRORS, 
-				payload: "Error removing Item from Cart"
-			})
-		})
-}
+export const removeItemInCart = (itemId, callback) => (dispatch) => {
+	axios.delete(baseURL + '/shoppingcart/removeProduct/' + itemId).then(() => callback()).catch((err) => {
+		dispatch({
+			type: GET_ERRORS,
+			payload: 'Error removing Item from Cart'
+		});
+	});
+};
 
-export const getShippingOptions = (shipping_region_id) => dispatch => {
+export const getShippingOptions = (shipping_region_id) => (dispatch) => {
 	axios
-		.get(baseURL + "/shipping/regions/" + shipping_region_id)
-		.then(res => {
+		.get(baseURL + '/shipping/regions/' + shipping_region_id)
+		.then((res) => {
 			dispatch({
-				type: GET_SHIPPING_OPTIONS, 
+				type: GET_SHIPPING_OPTIONS,
 				payload: res.data
-			})
+			});
 		})
-		.catch(err => {
+		.catch((err) => {
 			dispatch({
-				type: GET_ERRORS, 
-				payload: "Error feching shipping options"
-			})
-		})
-}
+				type: GET_ERRORS,
+				payload: 'Error feching shipping options'
+			});
+		});
+};
 
 export const getTotalAmount = () => (dispatch) => {
 	const cartId = localStorage.turingShoppingCart;
@@ -125,7 +128,6 @@ export const getProdInCart = () => (dispatch) => {
 		});
 };
 
-
 export const clearCart = () => (dispatch) => {
 	const cartId = localStorage.turingShoppingCart;
 	axios
@@ -146,20 +148,80 @@ export const clearCart = () => (dispatch) => {
 
 export const getTaxes = () => (dispatch) => {
 	axios
-		.get(baseURL + "/tax")
-		.then(res => {
+		.get(baseURL + '/tax')
+		.then((res) => {
 			dispatch({
-				type: GET_TAXES, 
+				type: GET_TAXES,
 				payload: res.data
-			})
+			});
 		})
+		.catch((err) => {
+			dispatch({
+				type: GET_ERRORS,
+				payload: 'Error feching taxes'
+			});
+		});
+};
+
+export const placeOrder = (data) => (dispatch) => {
+	const token = localStorage.jwtToken;
+	const headers = {
+		headers: { 'user-key': token }
+	};
+	axios
+		.post(baseURL + '/orders', data, headers)
+		.then((res) => {
+			dispatch({
+				type: PLACE_ORDER,
+				payload: res.data
+			});
+		})
+		.catch((err) => {
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.data
+			});
+		});
+};
+
+export const getOrders = () => (dispatch) => {
+	const token = localStorage.jwtToken;
+	const headers = {
+		headers: { 'user-key': token }
+	};
+
+	axios
+		.get(baseURL + '/orders/inCustomer', headers)
+		.then((res) => {
+			dispatch({
+				type: GET_ORDERS,
+				payload: res.data
+			});
+		})
+		.catch((err) => {
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.data
+			});
+		});
+};
+
+export const stripeCharge = (data, callback) => dispatch => {
+	data.stripeToken = stripe_public_token;
+	axios
+		.post(baseURL + "/stripe/charge", data)
+		.then(() => callback())
 		.catch(err => {
 			dispatch({
-				type: GET_ERRORS, 
-				payload: "Error feching taxes"
+				type: GET_ERRORS,
+				payload: err.response.data.error.message
 			})
 		})
 }
 
-
-
+export const setTotalToPay = amount => dispatch => {
+	dispatch({
+		type: SET_TOTAL_TO_PAY, 
+		payload: amount
+	})
+} 

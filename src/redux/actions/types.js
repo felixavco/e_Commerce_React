@@ -14,6 +14,9 @@ export const GET_TOTAL_AMOUNT = 'GET_TOTAL_AMOUNT';
 export const ADD_PROD_IN_CART = 'ADD_PROD_IN_CART';
 export const CLEAR_CART = 'CLEAR_CART';
 export const GET_TAXES = 'GET_TAXES';
+export const GET_ORDERS = 'GET_ORDERS';
+export const PLACE_ORDER = 'PLACE_ORDER';
+export const SET_TOTAL_TO_PAY = 'SET_TOTAL_TO_PAY';
 
 
 //Product Types

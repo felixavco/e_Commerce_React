@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { getShipRegs, getProfile } from '../../../redux/actions/customerActions';
 import { getShippingOptions } from '../../../redux/actions/shoppingCartActions';
 
 import Address from './Address';
+import PlaceOrder from './PlaceOrder';
 
 class Checkout extends Component {
 	state = {
@@ -31,7 +33,6 @@ class Checkout extends Component {
 				region,
 				postal_code,
 				country
-				// shipping_region_id
 			});
 		}
 
@@ -46,6 +47,10 @@ class Checkout extends Component {
 		if (auth.isAuthenticated) {
 			getProfile();
 			getShippingOptions(profile.shipping_region_id);
+		}
+
+		if(this.props.totalAmount === null || this.props.totalAmount === 0) {
+			this.props.history.push("/my-bag")
 		}
 	};
 
@@ -133,6 +138,7 @@ class Checkout extends Component {
 		return (
 			<div className="checkout container">
         <div style={{ display: `${!page2 ? 'block' : 'none'}` }}>
+					<h5 className="center-align">Shipping Address</h5>
           <Address
             shipping_options={shipping_options}
             onchange={this.onChange}
@@ -142,15 +148,15 @@ class Checkout extends Component {
         </div>
 
         <div style={{ display: `${page2 ? 'block' : 'none'}` }}>
-          <h1>Page 2</h1>
+          <PlaceOrder shipping_id={shipping_method} />
         </div>
 			
 				<div className="btn-cont">
 					<button onClick={this.onPrev} style={{ display: `${showPrev ? 'block' : 'none'}` }}>
-						Prev{' '}
+					<i className="fas fa-chevron-left" /> Prev
 					</button>
 					<button onClick={this.onNext} style={{ display: `${showNext ? 'block' : 'none'}` }}>
-						Next >>{' '}
+						Next <i className="fas fa-chevron-right" />
 					</button>
 				</div>
 			</div>
@@ -162,7 +168,8 @@ const mapStateToProps = (state) => ({
 	auth: state.auth,
 	regions: state.customer.regions,
 	profile: state.customer.profile,
-	shippingOptions: state.shoppingCart.shippingOptions
+	shippingOptions: state.shoppingCart.shippingOptions, 
+	totalAmount: state.shoppingCart.totalAmount
 });
 
-export default connect(mapStateToProps, { getShipRegs, getProfile, getShippingOptions })(Checkout);
+export default connect(mapStateToProps, { getShipRegs, getProfile, getShippingOptions })(withRouter(Checkout));

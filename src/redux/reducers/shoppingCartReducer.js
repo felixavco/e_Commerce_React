@@ -4,14 +4,20 @@ import {
   CLEAR_CART, 
   GET_SHIPPING_OPTIONS, 
   GET_TAXES, 
+  GET_ORDERS, 
+  PLACE_ORDER, 
+  SET_TOTAL_TO_PAY
 } from '../actions/types'
 
 const initialState = {
-  totalAmount: 0,
-  qtyAllProd: 0, 
+  totalAmount: 0, //Total amount $ 
+  qtyAllProd: 0,  //Quantity of products in Cart (bag)
   productsInCart: [], 
   shippingOptions: [], 
-  taxes: []
+  taxes: [],
+  orders: [], 
+  placed_order: {},
+  totalToPay: 0
 };
 
 export default (state = initialState, action) => {
@@ -50,6 +56,24 @@ export default (state = initialState, action) => {
       return {
         ...state, 
         taxes: action.payload
+      }
+      
+    case GET_ORDERS:
+      return {
+        ...state, 
+        orders: action.payload
+      }
+
+    case PLACE_ORDER:
+      return {
+        ...state, 
+        placed_order: action.payload
+      }
+
+    case SET_TOTAL_TO_PAY:
+      return {
+        ...state, 
+        totalToPay: action.payload
       }
       
     default:

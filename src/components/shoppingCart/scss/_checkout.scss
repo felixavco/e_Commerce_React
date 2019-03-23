@@ -1,0 +1,55 @@
+.checkout {
+	margin-bottom: 3rem;
+	.btn-cont {
+		display: flex;
+		justify-content: center;
+
+		button {
+			background: $primary;
+			padding: 1rem 1.5rem;
+			color: $textSecondary;
+			border: none;
+			border-radius: 3rem;
+			box-shadow: 1px 1px 3px #2e2e2e;
+			transition: all 200ms linear;
+			cursor: pointer;
+			&:hover {
+				box-shadow: 0px 0px 5px #2e2e2e;
+				background: darken($primary, 5%);
+			}
+		}
+	}
+}
+
+//Place order component
+.place-order {
+	margin: 2rem auto;
+	font-size: 1.3rem;
+	.cont {
+		width: 75%;
+		margin: 1rem auto;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.total-topay {
+		font-size: 1.6rem;
+		font-weight: bold;
+	}
+
+	a {
+    height: auto;
+		background: $primary;
+		padding: 0.5rem 2rem;
+		color: $textSecondary;
+		border: none;
+		border-radius: 3rem;
+		box-shadow: 1px 1px 3px #2e2e2e;
+		transition: all 200ms linear;
+		cursor: pointer;
+		&:hover {
+			box-shadow: 0px 0px 5px #2e2e2e;
+			background: darken($primary, 5%);
+		}
+	}
+}

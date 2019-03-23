@@ -228,14 +228,18 @@ export const getProductReviews = (id) => (dispatch) => {
  * Protected: True
  * Desc: post a produc review
  */
-export const postReview = (prodId, data) => dispatch => {
+export const postReview = (prodId, data, callback) => dispatch => {
+	const token = localStorage.jwtToken;
+	const headers = {
+		headers: {'user-key': token}
+	}
 	axios
-		.post(baseURL + `/products/${prodId}/reviews`, data)
-		.then(() => console.log("new review posted!"))
+		.post(baseURL + `/products/${prodId}/reviews`, data, headers)
+		.then(() => callback())
 		.catch(err => {
 			dispatch({
 				type: GET_ERRORS, 
-				payload: "ee"
+				payload: "Error Posting review"
 			})
 		})
 }

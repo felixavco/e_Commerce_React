@@ -46,7 +46,7 @@ class MyBag extends Component {
 						</span>
 						<h5>Total: ${totalAmount}</h5>
 						<Link className="btn" to="/checkout">
-							Checkout
+							Place Order
 						</Link>
 					</div>
 

@@ -30,7 +30,7 @@ class SingleProduct extends Component {
 
 	//Closes the modal when user clicks on the X or outside of the modal body, this also sets to empty the product and its attributes
 	closeModal = (e) => {
-		if (e.target.className.split(' ')[1] === 'active') {
+		if (e.target.className.length > 1 && e.target.className.split(' ')[1] === 'active') {
 			this.props.clearSingleProduct();
 		}
 	};
@@ -45,8 +45,8 @@ class SingleProduct extends Component {
 
 		if (this.props.isAuthenticated) {
 			postForm = (
-				<div className="post-review">
-					<PostReview />
+				<div className="post-review container">
+					<PostReview prodId={product_id} />
 				</div>
 			);
 		}
@@ -70,7 +70,7 @@ class SingleProduct extends Component {
 
 					{postForm}
 
-					<div className="reviews">
+					<div className="reviews container">
 						<Reviews />
 					</div>
 				</div>

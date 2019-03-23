@@ -29,6 +29,7 @@ import Profile from './components/customer/Profile';
 //Shopping Cart Components
 import MyBag from './components/shoppingCart/MyBag';
 import Checkout from './components/shoppingCart/Checkout/Checkout';
+import Payment from './components/shoppingCart/Checkout/Payment';
 
 //Checks if there is a token stored in LocalStorage
 if (localStorage.jwtToken) {
@@ -67,6 +68,7 @@ class App extends Component {
 									<Route exact path="/deparment/:deptId" component={Department} />
 									<Route exact path="/category/:catId" component={Category} />
 									<Route exact path="/checkout" component={Checkout} />
+									<Route exact path="/payment" component={Payment} />
 									{/* Private Routes */}
 									<PrivateRoute exact path="/profile" component={Profile} />
 								</Switch>
