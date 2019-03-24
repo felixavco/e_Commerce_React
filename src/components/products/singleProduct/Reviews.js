@@ -10,8 +10,8 @@ class Reviews extends Component {
 
 	render() {
 		const { productReviews } = this.props;
-		const reviews = productReviews.map((review) => (
-			<div className="review-cont">
+		const reviews = productReviews.map((review, i) => (
+			<div key={i} className="review-cont">
 				<h6>
 					<strong>{review.name}</strong>
 				</h6>

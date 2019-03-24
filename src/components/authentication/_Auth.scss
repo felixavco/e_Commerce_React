@@ -1,86 +1,130 @@
-.register, .login {
-  box-shadow: 0 0 10px #8f8f8f;
-  padding: 1.5rem;
-  margin: 2rem auto;
-  transition: box-shadow 250ms linear;
-  &:hover {
-    box-shadow: 0 0 25px #8f8f8f;
-  }
+.auth-modal {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: -170%;
+	opacity: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.90);
+  z-index: 100;
+  transition: all 250ms ease-in-out;
+}
 
-  h3 {
-    color: $textPrimary;
-  }
-  small {
-    color: #9e9e9e;
-  }
+.modal-active {
+	top: 0;
+	opacity: 1;
+}
 
-  .onError {
-    color: red;
-    font-size: 1rem;
-    transition: all 200ms linear;
-  }
+#login-cont, #register-cont {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+  align-items: center;
 
-  .onErrorAll {
-     /* label underline focus color */
-    .input-field input {
-      border-bottom: 0px solid red;
-      box-shadow: 0 1px 0 0 red;
+	.register,
+	.login {
+		background: $textSecondary;
+    border-radius: 1rem;
+    padding: 1rem 2rem 2rem 2rem;
+
+    .btn-close-cont {
+      display: flex;
+      justify-content: flex-end;
+      color: $primary;
+      font-size: 2rem;
+      i {
+        cursor: pointer;
+        margin: 0.7rem 0.5rem 0 0;
+        transition: transform 250ms ease-in-out;
+        &:hover {
+          transform: rotate(90deg)
+        }
+      }
     }
 
-      /* label color */
-    .input-field label {
-      color: red;
-    }
-  }
-
-  .onErrorInput {
-    input {
-      border-bottom: 0px solid red;
-      box-shadow: 0 1px 0 0 red;
+    form {
+      input {
+        text-align: center;
+      }
     }
 
-    input + label {
-      color: red;
-    }
-  }
+		h3 {
+			color: $textPrimary;
+		}
+		small {
+			color: #6b6b6b;
+			display: block;
+			margin-bottom: 1rem;
+			text-align: center;
+		}
 
-  /* label color */
-  .input-field label {
-    color: $textPrimary;
-  }
-  /* label focus color */
-  .input-field input[type=text]:focus + label {
-    color: #8a8a8a;
-  }
+		.onError {
+			color: red;
+			font-size: 1rem;
+			transition: all 200ms linear;
+		}
 
-  .input-field input[type=email]:focus + label {
-    color: #8a8a8a;
-  }
+		.onErrorAll {
+			/* label underline focus color */
+			.input-field input {
+				border-bottom: 0px solid red;
+				box-shadow: 0 1px 0 0 red;
+			}
 
-  .input-field input[type=password]:focus + label {
-    color: #8a8a8a;
-  }
+			/* label color */
+			.input-field label {
+				color: red;
+			}
+		}
 
-  /* label underline focus color */
-  .input-field input[type=text]:focus {
-    border-bottom: 1px solid $textPrimary;
-    box-shadow: 0 1px 0 0 $textPrimary;
-  }
+		.onErrorInput {
+			input {
+				border-bottom: 0px solid red;
+				box-shadow: 0 1px 0 0 red;
+			}
 
-   /* label underline focus color */
-   .input-field input[type=email]:focus {
-    border-bottom: 1px solid $textPrimary;
-    box-shadow: 0 1px 0 0 $textPrimary;
-  }
+			input + label {
+				color: red;
+			}
+		}
 
-   /* label underline focus color */
-   .input-field input[type=password]:focus {
-    border-bottom: 1px solid $textPrimary;
-    box-shadow: 0 1px 0 0 $textPrimary;
-  }
+		/* label color */
+		.input-field label {
+			color: $textPrimary;
+		}
+		/* label focus color */
+		.input-field input[type=text]:focus + label {
+			color: #8a8a8a;
+		}
 
-  .btn {
-    background-color: $primary;
-  }
+		.input-field input[type=email]:focus + label {
+			color: #8a8a8a;
+		}
 
+		.input-field input[type=password]:focus + label {
+			color: #8a8a8a;
+		}
+
+		/* label underline focus color */
+		.input-field input[type=text]:focus {
+			border-bottom: 1px solid $textPrimary;
+			box-shadow: 0 1px 0 0 $textPrimary;
+		}
+
+		/* label underline focus color */
+		.input-field input[type=email]:focus {
+			border-bottom: 1px solid $textPrimary;
+			box-shadow: 0 1px 0 0 $textPrimary;
+		}
+
+		/* label underline focus color */
+		.input-field input[type=password]:focus {
+			border-bottom: 1px solid $textPrimary;
+			box-shadow: 0 1px 0 0 $textPrimary;
+		}
+
+		.btn {
+			background-color: $primary;
+		}
+	}
 }

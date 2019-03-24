@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TopNav from './TopNav';
 import BottomNav from './BottomNav';
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom';
 //Redux
 import { connect } from 'react-redux';
 import { logoutUser } from '../../../redux/actions/authActions';
@@ -11,14 +11,14 @@ let timer;
 
 class Navbar extends Component {
 	constructor(props) {
-    super(props);
+		super(props);
 		this.state = {
 			isAuth: this.props.auth.isAuthenticated,
 			isMenuActive: false,
 			isSearch: true,
 			bagCount: 0,
 			total: 0,
-			searchText: '',
+			searchText: ''
 		};
 	}
 
@@ -30,7 +30,7 @@ class Navbar extends Component {
 			});
 		}
 
-		if (nextProps.totalAmount!== this.props.totalAmount) {
+		if (nextProps.totalAmount !== this.props.totalAmount) {
 			this.setState({ total: nextProps.totalAmount });
 		}
 
@@ -55,31 +55,30 @@ class Navbar extends Component {
 		this.setState({ [e.target.name]: e.target.value });
 	};
 
-  onKeyUp = (e) => {
-    let value = e.target.value;
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      this.onSearch(value)
-    }, 500)
-  }
-
-  onKeyDown = () => {
-    clearTimeout(timer)
-  }
-
-
-  onSearch (search) {
-    this.props.setSearchQuery(search, this.props.history);
+	onKeyUp = (e) => {
+		let value = e.target.value.trim();
+		clearTimeout(timer);
+		timer = setTimeout(() => {
+			this.onSearch(value);
+		}, 500);
 	};
 
+	onKeyDown = () => {
+		clearTimeout(timer);
+	};
+
+	onSearch(search) {
+		this.props.setSearchQuery(search, this.props.history);
+	}
 
 	render() {
-    
 		const { isAuth, isMenuActive, bagCount, isSearch, searchText, total } = this.state;
 		const { name } = this.props.auth.user;
 		return (
 			<header>
-				<h4 className="brand2">SHOPMATE</h4>
+				<Link to="/">
+					<h4 className="brand2">SHOPMATE</h4>
+				</Link>
 				<div className={isMenuActive ? 'nav menuActive' : 'nav'}>
 					<TopNav
 						isAuth={isAuth}
@@ -114,4 +113,6 @@ const mapStateToProps = (state) => ({
 	qtyAllProd: state.shoppingCart.qtyAllProd
 });
 
-export default connect(mapStateToProps, { logoutUser, setSearchQuery, getTotalAmount, getProdInCart, getDeparments })(withRouter(Navbar));
+export default connect(mapStateToProps, { logoutUser, setSearchQuery, getTotalAmount, getProdInCart, getDeparments })(
+	withRouter(Navbar)
+);

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import 'materialize-css/dist/css/materialize.min.css';
 import './styles/App.css';
 //React Router
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 //Redux
 import { Provider } from 'react-redux';
 import store from './redux/store';
@@ -20,8 +20,6 @@ import Department from './components/products/Department';
 import Category from './components/products/Category';
 import SearchResults from './components/products/SearchResults';
 //Authentication Components
-import Login from './components/authentication/Login';
-import Register from './components/authentication/Register';
 import PrivateRoute from './components/authentication/PrivateRoute';
 import { logoutUser, setCurrentUser } from './redux/actions/authActions';
 //Customer Componets
@@ -30,6 +28,8 @@ import Profile from './components/customer/Profile';
 import MyBag from './components/shoppingCart/MyBag';
 import Checkout from './components/shoppingCart/Checkout/Checkout';
 import Payment from './components/shoppingCart/Checkout/Payment';
+//Nof Found Page
+import NotFound from './components/commons/NotFound';
 
 //Checks if there is a token stored in LocalStorage
 if (localStorage.jwtToken) {
@@ -47,7 +47,7 @@ if (localStorage.jwtToken) {
 		// Clear current profile
 		store.dispatch(setCurrentUser({}));
 		//Redirect to login
-		window.location.href = '/login';
+		window.location.href = '/';
 	}
 }
 
@@ -60,8 +60,6 @@ class App extends Component {
 						<Navbar />
 							<div id="main">
 								<Switch>
-									<Route exact path="/login" component={Login} />
-									<Route exact path="/register" component={Register} />
 									<Route exact path="/my-bag" component={MyBag} />
 									<Route exact path="/" component={AllProducts} />
 									<Route exact path="/search-results" component={SearchResults} />
@@ -71,6 +69,9 @@ class App extends Component {
 									<Route exact path="/payment" component={Payment} />
 									{/* Private Routes */}
 									<PrivateRoute exact path="/profile" component={Profile} />
+									{/* CatchAll route  404 page */}
+									<Route exact path="/not-found" component={NotFound} />
+									<Redirect to="/not-found" />
 								</Switch>
 							</div>
 						<Footer />

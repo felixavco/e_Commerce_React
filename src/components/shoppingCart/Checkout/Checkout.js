@@ -151,11 +151,14 @@ class Checkout extends Component {
           <PlaceOrder shipping_id={shipping_method} />
         </div>
 			
-				<div className="btn-cont">
+				<div className="btn-l">
 					<button onClick={this.onPrev} style={{ display: `${showPrev ? 'block' : 'none'}` }}>
 					<i className="fas fa-chevron-left" /> Prev
 					</button>
-					<button onClick={this.onNext} style={{ display: `${showNext ? 'block' : 'none'}` }}>
+				</div>
+
+				<div className="btn-r">
+					<button onClick={this.onNext} style={{ display: `${showNext ? 'block' : 'none'}`}}>
 						Next <i className="fas fa-chevron-right" />
 					</button>
 				</div>

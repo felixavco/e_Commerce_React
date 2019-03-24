@@ -16,7 +16,7 @@ const initialState = {
   shippingOptions: [], 
   taxes: [],
   orders: [], 
-  placed_order: {},
+  placed_order: 0,
   totalToPay: 0
 };
 

@@ -30,7 +30,7 @@ class SingleProduct extends Component {
 
 	//Closes the modal when user clicks on the X or outside of the modal body, this also sets to empty the product and its attributes
 	closeModal = (e) => {
-		if (e.target.className.length > 1 && e.target.className.split(' ')[1] === 'active') {
+		if (e.target.className.length > 1 && e.target.className.includes('active')) {
 			this.props.clearSingleProduct();
 		}
 	};

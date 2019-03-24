@@ -2,7 +2,7 @@ import { GET_PROFILE, GET_REGIONS } from '../actions/types';
 
 const initialState = {
 	profile: {},
-	regions: []
+	regions: [] //List of Shipping regions
 };
 
 export default (state = initialState, action) => {

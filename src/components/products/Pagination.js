@@ -145,7 +145,7 @@ Pagination.propTypes = {
 	itemsPerPage: PropTypes.number.isRequired,
 	descriptionLen: PropTypes.number.isRequired,
 	pagePath: PropTypes.string,
-	deptId: PropTypes.string
+	deptId: PropTypes.any
 };
 
 Pagination.defaultProps = {

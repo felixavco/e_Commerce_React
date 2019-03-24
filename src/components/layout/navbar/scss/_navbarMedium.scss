@@ -45,7 +45,7 @@
 					width: 25%;
 
 					input {
-						background: lighten( $textPrimary, 25% );
+						background: lighten( $textPrimary, 80% );
 						width: 100%;
 						margin: 0;
 						border: none;
@@ -55,6 +55,13 @@
 						transform: scale(0);
 						transform-origin: 100%;
 						transition: all 250ms linear;
+						color: $primary;
+						border-bottom: 2px solid transparent;
+						box-shadow: 0 1px 0 0 transparent;
+						&:focus {
+							border-bottom: 2px solid $primary;
+							box-shadow: 0 1px 0 0 $primary;
+						}
 					}
 
 					.input-active {

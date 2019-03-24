@@ -12,7 +12,11 @@ import {
 } from './types';
 import { baseURL, stripe_public_token } from '../../config/config';
 
-//Get a unique Cart ID if there is no Cart id in localstorage
+/**
+ * Method: GET
+ * Protected: false
+ * Desc: Gets a unique Cart ID and store the id in Local Storage as 'turingShoppingCart'
+ */
 export const getCartId = () => (dispatch) => {
 	const url = baseURL + '/shoppingcart/generateUniqueId';
 	axios
@@ -29,8 +33,11 @@ export const getCartId = () => (dispatch) => {
 		});
 };
 
-//Add Product to Cart (Bag)
-export const addProdToChart = (prodId, attr) => (dispatch) => {
+/**
+ * Method: POST
+ * Protected: false
+ * Desc: Adds Product to cart (bag)
+ */export const addProdToChart = (prodId, attr) => (dispatch) => {
 	const cartId = localStorage.turingShoppingCart;
 	const data = {
 		cart_id: cartId,
@@ -54,8 +61,16 @@ export const addProdToChart = (prodId, attr) => (dispatch) => {
 		});
 };
 
+/**
+ * Method: PUT
+ * Protected: false
+ * Desc: Update single product in cart 
+ */
 export const updateItemInCart = (itemId, qty, callback) => (dispatch) => {
-	axios.put(baseURL + '/shoppingcart/update/' + itemId, { quantity: qty }).then(() => callback()).catch((err) => {
+	axios
+	.put(baseURL + '/shoppingcart/update/' + itemId, { quantity: qty })
+	.then(() => callback())
+	.catch((err) => {
 		dispatch({
 			type: GET_ERRORS,
 			payload: 'Error updating product'
@@ -63,8 +78,16 @@ export const updateItemInCart = (itemId, qty, callback) => (dispatch) => {
 	});
 };
 
+/**
+ * Method: DELETE
+ * Protected: false
+ * Desc: Removes a product from cart
+ */
 export const removeItemInCart = (itemId, callback) => (dispatch) => {
-	axios.delete(baseURL + '/shoppingcart/removeProduct/' + itemId).then(() => callback()).catch((err) => {
+	axios
+		.delete(baseURL + '/shoppingcart/removeProduct/' + itemId)
+		.then(() => callback())
+		.catch((err) => {
 		dispatch({
 			type: GET_ERRORS,
 			payload: 'Error removing Item from Cart'
@@ -72,6 +95,11 @@ export const removeItemInCart = (itemId, callback) => (dispatch) => {
 	});
 };
 
+/**
+ * Method: GET
+ * Protected: false
+ * Desc: Gets an array with the shipping options and price
+ */
 export const getShippingOptions = (shipping_region_id) => (dispatch) => {
 	axios
 		.get(baseURL + '/shipping/regions/' + shipping_region_id)
@@ -89,6 +117,11 @@ export const getShippingOptions = (shipping_region_id) => (dispatch) => {
 		});
 };
 
+/**
+ * Method: GET
+ * Protected: false
+ * Desc: Gets the Total of the sum of all products
+ */
 export const getTotalAmount = () => (dispatch) => {
 	const cartId = localStorage.turingShoppingCart;
 	const url = baseURL + '/shoppingcart/totalAmount/' + cartId;
@@ -108,7 +141,11 @@ export const getTotalAmount = () => (dispatch) => {
 		});
 };
 
-//Get all Products in cart
+/**
+ * Method: GET
+ * Protected: false
+ * Desc: Rerturns an array with all the products in Cart
+ */
 export const getProdInCart = () => (dispatch) => {
 	const cartId = localStorage.turingShoppingCart;
 	const url = baseURL + '/shoppingcart/' + cartId;
@@ -128,6 +165,11 @@ export const getProdInCart = () => (dispatch) => {
 		});
 };
 
+/**
+ * Method: delete
+ * Protected: false
+ * Desc: Deletes all the products in Cart
+ */
 export const clearCart = () => (dispatch) => {
 	const cartId = localStorage.turingShoppingCart;
 	axios
@@ -146,6 +188,11 @@ export const clearCart = () => (dispatch) => {
 		});
 };
 
+/**
+ * Method: GET
+ * Protected: false
+ * Desc: Returns an array with Tax options
+ */
 export const getTaxes = () => (dispatch) => {
 	axios
 		.get(baseURL + '/tax')
@@ -163,6 +210,11 @@ export const getTaxes = () => (dispatch) => {
 		});
 };
 
+/**
+ * Method: POST
+ * Protected: true
+ * Desc: Saves the Order and Clears cart
+ */
 export const placeOrder = (data) => (dispatch) => {
 	const token = localStorage.jwtToken;
 	const headers = {
@@ -173,7 +225,7 @@ export const placeOrder = (data) => (dispatch) => {
 		.then((res) => {
 			dispatch({
 				type: PLACE_ORDER,
-				payload: res.data
+				payload: res.data.orderId
 			});
 		})
 		.catch((err) => {
@@ -184,6 +236,11 @@ export const placeOrder = (data) => (dispatch) => {
 		});
 };
 
+/**
+ * Method: GET
+ * Protected: true
+ * Desc: Returns an array with all the orders made by a user 
+ */
 export const getOrders = () => (dispatch) => {
 	const token = localStorage.jwtToken;
 	const headers = {
@@ -206,6 +263,11 @@ export const getOrders = () => (dispatch) => {
 		});
 };
 
+/**
+ * Method: POST 
+ * Protected: false
+ * Desc: Performs the payment through stripe
+ */
 export const stripeCharge = (data, callback) => dispatch => {
 	data.stripeToken = stripe_public_token;
 	axios
@@ -219,6 +281,11 @@ export const stripeCharge = (data, callback) => dispatch => {
 		})
 }
 
+/**
+ * Method: N/A
+ * Protected: N/A
+ * Desc: Sets the total to pay in the store to be used in the payment page
+ */
 export const setTotalToPay = amount => dispatch => {
 	dispatch({
 		type: SET_TOTAL_TO_PAY, 

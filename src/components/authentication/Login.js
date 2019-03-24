@@ -4,9 +4,7 @@ import Spinner from '../commons/Spinner';
 
 //Redux
 import { connect } from 'react-redux';
-import { authUser } from '../../redux/actions/authActions';
-//Router
-import { withRouter } from 'react-router-dom';
+import { authUser, setAuthModal } from '../../redux/actions/authActions';
 
 class Login extends Component {
 	constructor() {
@@ -19,17 +17,10 @@ class Login extends Component {
 		};
 	}
 
-	componentWillMount() {
-		/*When the user is logged, this will redirect the user to the home page if they try to manually access to this route*/
-		if(this.props.auth.isAuthenticated) {
-      this.props.history.push('/')
-    }
-	}
-
 	//Set errors from redux to the component state
 	componentWillReceiveProps = (nextProps) => {
 		if (nextProps.errors) {
-			this.setState({ 
+			this.setState({
 				errors: nextProps.errors,
 				isLoading: false
 			});
@@ -42,8 +33,13 @@ class Login extends Component {
 	onSubmit = (e) => {
 		e.preventDefault();
 		const { email, password } = this.state;
-		this.setState({isLoading: true});
-		this.props.authUser({email, password }, this.props.history, true);
+		this.setState({ isLoading: true });
+		this.props.authUser({ email, password }, true, this.props.closeModal);
+	};
+
+	openAuthModal = (e, value) => {
+		e.preventDefault();
+		this.props.setAuthModal(value);
 	};
 
 	render() {
@@ -54,7 +50,7 @@ class Login extends Component {
 				<div>
 					<Spinner size="small" />
 				</div>
-			)
+			);
 		} else {
 			content = (
 				<div className="center-align">
@@ -66,35 +62,40 @@ class Login extends Component {
 		}
 
 		return (
-			<div className="container login">
-				<h3 className="center-align">Sign in</h3>
-				<div className="container" >
-				<small>* All Fields Are Required!</small>
+			<div className="modal-cont container" id="login-cont">
+				<div className="login">
+					<div className="btn-close-cont">
+						<i className="modal-cont far fa-times-circle" />
+					</div>
 					<form onSubmit={this.onSubmit} className="row" noValidate>
+						<h3 className="center-align">Sign in</h3>
+						<small>* All Fields Are Required!</small>
 
-						<div className={`col s12 input-field  ${errors.field === "email" ? "onErrorInput" : ""}`}>
-							<input 
-								onChange={this.onChange} 
-								id="email" 
-								type="email" 
-								name="email" 
-								value={email} 
-							/>
-							<label htmlFor="email">{errors.field === "email" ? errors.message : "Email *"}</label>
+						<div className={`col s12 input-field  ${errors.field === 'email' ? 'onErrorInput' : ''}`}>
+							<input onChange={this.onChange} id="email" type="email" name="email" value={email} />
+							<label htmlFor="email">{errors.field === 'email' ? errors.message : 'Email *'}</label>
 						</div>
 
-            <div className={`col s12 input-field  ${errors.field === "password" ? "onErrorInput" : ""}`}>
-              <input
-                onChange={this.onChange}
-                id="password"
-                type="password"
-                name="password"
-                value={password}
-              />
-              <label htmlFor="password">{errors.field === "password" ? errors.message : "Password *"}</label>
-            </div>
-						{ content }
+						<div className={`col s12 input-field  ${errors.field === 'password' ? 'onErrorInput' : ''}`}>
+							<input
+								onChange={this.onChange}
+								id="password"
+								type="password"
+								name="password"
+								value={password}
+							/>
+							<label htmlFor="password">
+								{errors.field === 'password' ? errors.message : 'Password *'}
+							</label>
+						</div>
+						{content}
 					</form>
+					<h6>
+						Don't have an account?{' '}
+						<a onClick={(event) => this.openAuthModal(event, 'register')} href="#!">
+							Register
+						</a>
+					</h6>
 				</div>
 			</div>
 		);
@@ -106,5 +107,4 @@ const mapStateToProps = (state) => ({
 	errors: state.errors
 });
 
-export default connect(mapStateToProps, { authUser })(withRouter(Login));
-
+export default connect(mapStateToProps, { authUser, setAuthModal })(Login);

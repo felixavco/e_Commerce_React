@@ -8,7 +8,7 @@ const BottomNav = ({ closeMenu, isSearch, toggleSearch, searchText, onChange, on
 	return (
 		<div className="bottomNav">
 			<div>
-			<Link to="/"><h4 className="brand">SHOPMATE</h4></Link>
+			<Link onClick={closeMenu} to="/"><h4 className="brand">SHOPMATE</h4></Link>
 			</div>
 
 			<div className="col s12 l4">

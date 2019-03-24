@@ -33,7 +33,7 @@ const Address = ({ address, onchange, regions, shipping_options }) => {
 				<label style={{ position: `${address_1 ? 'static' : 'absolute'}` }} htmlFor="address_1">
 					Address 1
 				</label>
-				<input onChange={onchange} type="text" name="address_1" value={address_1 } id="address_1" />
+				<input onChange={onchange} type="text" name="address_1" value={address_1 || ""} id="address_1" />
 			</div>
 
 			<div className="input-field">

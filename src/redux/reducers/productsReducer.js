@@ -14,16 +14,16 @@ import {
 } from '../actions/types';
 
 const initialState = {
-	allProducts: [],
-	singleProduct: {},
+	allProducts: [], //All Products to display per page 
+	singleProduct: {}, 
 	prod_attributes: [],
-	totalProducts: 0,
+	totalProducts: 0, //Total number of products in Cart (Bag)
 	productReviews: [],
   deparments: [], 
 	categories: {}, 
 	deparment_id: 1,
 	category_id: 1,
-	searchQuery: ''
+	searchQuery: '' //The search query is set on the search bar in the nav and is used in the Search page to make the search
 };
 
 export default (state = initialState, action) => {
