@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import 'materialize-css';
+import PropTypes from 'prop-types';
 import Spinner from '../commons/Spinner';
 
 //Redux
@@ -69,7 +69,7 @@ class Register extends Component {
 
 		if (isLoading) {
 			content = (
-				<div>
+				<div className="col s12">
 					<Spinner size="small" />
 				</div>
 			);
@@ -95,8 +95,8 @@ class Register extends Component {
 						noValidate
 					>
 						<h3 className="center-align">Register</h3>
-
 						<small className={errorField.length > 1 ? 'onError' : ''}>* All Fields Are Required!</small>
+
 						<div className={`col s12 input-field  ${errors.field === 'name' ? 'onErrorInput' : ''}`}>
 							<input onChange={this.onChange} id="name" type="text" name="name" value={name} />
 							<label htmlFor="name">{errors.field === 'name' ? 'Name is required!' : 'Name *'}</label>
@@ -119,6 +119,7 @@ class Register extends Component {
 									type="password"
 									name="password"
 									value={password}
+									autoComplete="true"  
 								/>
 								<label htmlFor="password">
 									{errors.field === 'password' ? 'Password is required!' : 'Password *'}
@@ -132,6 +133,7 @@ class Register extends Component {
 									type="password"
 									name="password2"
 									value={password2}
+									autoComplete="true" 
 								/>
 								<label htmlFor="password2">
 									{!pwdMatch ? "Passwords don't match" : 'Confirm your Password *'}
@@ -150,6 +152,14 @@ class Register extends Component {
 			</div>
 		);
 	}
+}
+
+Register.propTypes = {
+	auth: PropTypes.object.isRequired, 
+	errors: PropTypes.object.isRequired, 
+	setAuthModal: PropTypes.func.isRequired, 
+	authUser: PropTypes.func.isRequired, 
+	closeModal: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({

@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 //Components
 import Loading from '../commons/Loading';
 import Pagination from './Pagination';
@@ -74,11 +75,19 @@ class AllProducts extends Component {
 	}
 }
 
+AllProducts.propTypes = { 
+	allProducts: PropTypes.array.isRequired,
+	errors: PropTypes.object.isRequired,
+	totalProducts: PropTypes.number.isRequired,
+	searchQuery: PropTypes.string.isRequired,
+	getProducts: PropTypes.func.isRequired,
+}
+
 const mapStateToProps = (state) => ({
 	allProducts: state.products.allProducts,
 	errors: state.errors,
 	totalProducts: state.products.totalProducts,
-	searchQuery: state.products.searchQuery
+	searchQuery: state.products.searchQuery, 
 });
 
 export default connect(mapStateToProps, { getProducts })(AllProducts);

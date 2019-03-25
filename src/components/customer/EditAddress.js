@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { updateAddress, getProfile,  } from '../../redux/actions/customerActions';
 import country_list from './country_list';
@@ -62,15 +63,15 @@ class EditAddress extends Component {
 					<ul>
 						<li>
 							<span>Address 1:</span>
-							<input onChange={this.onChange} name="address_1" value={address_1} type="text" />
+							<input onChange={this.onChange} name="address_1" value={address_1 || ""} type="text" />
 						</li>
 						<li>
 							<span>Address 2:</span>
-							<input onChange={this.onChange} name="address_2" value={address_2} type="text" />
+							<input onChange={this.onChange} name="address_2" value={address_2 || ""} type="text" />
 						</li>
 						<li>
 							<span>City:</span>
-							<input placeholder="City" onChange={this.onChange} name="city" value={city} type="text" />
+							<input placeholder="City" onChange={this.onChange} name="city" value={city || ""} type="text" />
 						</li>
 						<li>
 							<span>Region:</span>
@@ -78,7 +79,7 @@ class EditAddress extends Component {
 								placeholder="Region"
 								onChange={this.onChange}
 								name="region"
-								value={region}
+								value={region || ""}
 								type="text"
 							/>
 						</li>
@@ -88,13 +89,13 @@ class EditAddress extends Component {
 								placeholder="Enter your secondary phone number"
 								onChange={this.onChange}
 								name="postal_code"
-								value={postal_code}
+								value={postal_code || ""}
 								type="text"
 							/>
 						</li>
 						<li>
 							<span>Country:</span>
-							<select onChange={this.onChange} name="country" value={country}>
+							<select onChange={this.onChange} name="country" value={country || ""}>
 								{countries}
 							</select>
 						</li>
@@ -120,6 +121,13 @@ class EditAddress extends Component {
 			</div>
 		);
 	}
+}
+
+EditAddress.propTypes = {
+	profile: PropTypes.object.isRequired,
+	updateAddress: PropTypes.func.isRequired,
+	getProfile: PropTypes.func.isRequired, 
+	closeEditMode: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({

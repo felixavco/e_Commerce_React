@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Attributes = ({ colors, sizes, onChange, picked_color, picked_size }) => {
 	const COLORS = colors.map((color) => (
@@ -45,5 +46,13 @@ const Attributes = ({ colors, sizes, onChange, picked_color, picked_size }) => {
 		</div>
 	);
 };
+
+Attributes.propTypes = {
+	picked_color: PropTypes.string.isRequired, 
+	picked_size: PropTypes.string.isRequired, 
+	onChange: PropTypes.func.isRequired, 
+	sizes: PropTypes.array.isRequired, 
+	colors: PropTypes.array.isRequired
+}
 
 export default Attributes;

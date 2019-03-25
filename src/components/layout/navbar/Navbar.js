@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import TopNav from './TopNav';
 import BottomNav from './BottomNav';
 import { withRouter, Link } from 'react-router-dom';
@@ -105,6 +106,17 @@ class Navbar extends Component {
 			</header>
 		);
 	}
+}
+
+Navbar.propTypes = {
+	auth: PropTypes.object.isRequired,
+	totalAmount: PropTypes.string,
+	qtyAllProd: PropTypes.number.isRequired,
+	logoutUser: PropTypes.func.isRequired,
+	setSearchQuery: PropTypes.func.isRequired,
+	getTotalAmount: PropTypes.func.isRequired,
+	getProdInCart: PropTypes.func.isRequired,
+	getDeparments: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({

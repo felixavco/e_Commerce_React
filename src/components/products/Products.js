@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ProductItem from './ProductItem';
 import SingleProduct from './singleProduct/SingleProduct';
 
@@ -18,6 +19,10 @@ const Products = ({products}) => {
       </div>
     </div>
   )
+}
+
+Products.propTypes = {
+  products: PropTypes.array.isRequired
 }
 
 export default Products;

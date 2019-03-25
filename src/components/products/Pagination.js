@@ -145,7 +145,11 @@ Pagination.propTypes = {
 	itemsPerPage: PropTypes.number.isRequired,
 	descriptionLen: PropTypes.number.isRequired,
 	pagePath: PropTypes.string,
-	deptId: PropTypes.any
+	deptId: PropTypes.any,
+	getProducts: PropTypes.func.isRequired,
+	getProductsInDept: PropTypes.func.isRequired,
+	getProductsinCat: PropTypes.func.isRequired,
+	searchProducts: PropTypes.func.isRequired,
 };
 
 Pagination.defaultProps = {

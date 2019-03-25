@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getCategories, getCategoriesInDept, setCatId } from '../../redux/actions/productsAction';
@@ -43,6 +44,13 @@ class CategoryNav extends Component {
 			</div>
 		);
 	}
+}
+
+CategoryNav.propTypes = {
+	categories: PropTypes.array.isRequired,
+	getCategories: PropTypes.func.isRequired,
+	getCategoriesInDept: PropTypes.func.isRequired,
+	setCatId: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({

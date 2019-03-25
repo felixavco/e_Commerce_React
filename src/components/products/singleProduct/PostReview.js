@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import { postReview, getProductReviews } from '../../../redux/actions/productsAction'
 import StarRatings from 'react-star-ratings';
@@ -61,6 +62,12 @@ class PostReview extends Component {
 			</div>
 		);
 	}
+}
+
+PostReview.propTypes = {
+	postReview: PropTypes.func.isRequired,
+	getProductReviews: PropTypes.func.isRequired,
+	prodId: PropTypes.number,
 }
 
 export default connect(null, { postReview, getProductReviews })(PostReview);

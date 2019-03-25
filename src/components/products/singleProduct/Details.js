@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import AddToCart from './AddToCart';
 
 const Details = ({product}) => {
@@ -18,6 +19,10 @@ const Details = ({product}) => {
       <AddToCart product_id={product_id}/>
     </div>
   )
+}
+
+Details.propTypes = {
+  product: PropTypes.object.isRequired
 }
 
 export default Details

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { updateItemInCart, getProdInCart, removeItemInCart } from '../../redux/actions/shoppingCartActions';
 import { connect } from 'react-redux';
 
@@ -36,6 +37,12 @@ class CartItem extends Component {
 			</tr>
 		);
 	}
+}
+
+CartItem.propTypes = { 
+	updateItemInCart: PropTypes.func.isRequired,
+	getProdInCart: PropTypes.func.isRequired,
+	removeItemInCart: PropTypes.func.isRequired,
 }
 
 export default connect(null, { updateItemInCart, getProdInCart, removeItemInCart })(CartItem);

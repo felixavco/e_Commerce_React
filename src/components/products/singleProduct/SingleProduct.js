@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import isEmpty from '../../../utils/isEmpty';
 import { connect } from 'react-redux';
 import { clearSingleProduct } from '../../../redux/actions/productsAction';
@@ -51,6 +52,12 @@ class SingleProduct extends Component {
 			);
 		}
 
+		let gallery
+
+		if(active){
+			gallery = <Gallery images={[ image, image_2 ]} />
+		}
+
 		return (
 			<div onClick={this.closeModal} className={`single-product ${active ? 'active' : ''}`}>
 				<div className="product-cont container">
@@ -60,7 +67,7 @@ class SingleProduct extends Component {
 					<div className="row">
 						<h3 className="center-align">{name}</h3>
 						<div className="col s12 m5">
-							<Gallery images={[ image, image_2 ]} />
+							{ gallery }
 						</div>
 
 						<div className="col s12 m7">
@@ -77,6 +84,13 @@ class SingleProduct extends Component {
 			</div>
 		);
 	}
+}
+
+SingleProduct.propTypes = {
+	isAuthenticated: PropTypes.bool.isRequired, 
+	singleProduct: PropTypes.object.isRequired, 
+	prod_attributes: PropTypes.array.isRequired, 
+	clearSingleProduct: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({

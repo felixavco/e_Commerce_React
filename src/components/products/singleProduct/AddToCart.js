@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux';
 import Attributes from './Attributes';
 import { addProdToChart, getTotalAmount } from '../../../redux/actions/shoppingCartActions';
@@ -60,6 +62,15 @@ class AddToCart extends Component {
 			</div>
 		);
 	}
+}
+
+AddToCart.propTypes = {
+	prod_attributes: PropTypes.array.isRequired,
+	product_id: PropTypes.number,
+	qtyAllProd: PropTypes.any.isRequired,
+	addProdToChart: PropTypes.func.isRequired, 
+	clearSingleProduct: PropTypes.func.isRequired, 
+	getTotalAmount: PropTypes.func.isRequired, 
 }
 
 const mapStateToProps = (state) => ({

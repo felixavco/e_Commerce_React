@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { stripeCharge } from '../../../redux/actions/shoppingCartActions';
 import { withRouter } from 'react-router-dom';
@@ -67,6 +68,11 @@ class Payment extends Component {
 			</div>
 		);
 	}
+}
+
+Payment.propTypes = { 
+	totalToPay: PropTypes.number.isRequired, 
+	placed_order: PropTypes.number.isRequired, 
 }
 
 const mapStateToProps = (state) => ({

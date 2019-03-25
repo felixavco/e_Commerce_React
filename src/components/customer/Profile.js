@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux';
 import { getProfile, getShipRegs } from '../../redux/actions/customerActions';
 //Components 
@@ -58,6 +60,13 @@ class Profile extends Component {
 			</div>
 		);
 	}
+}
+
+Profile.propTypes = {
+  profile: PropTypes.object.isRequired,
+  regions: PropTypes.array.isRequired, 
+  getProfile: PropTypes.func.isRequired, 
+  getShipRegs: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({

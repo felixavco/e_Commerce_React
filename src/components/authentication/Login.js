@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import 'materialize-css';
+import PropTypes from 'prop-types';
 import Spinner from '../commons/Spinner';
 
 //Redux
@@ -19,7 +19,7 @@ class Login extends Component {
 
 	//Set errors from redux to the component state
 	componentWillReceiveProps = (nextProps) => {
-		if (nextProps.errors) {
+		if (nextProps.errors !== this.props.errors) {
 			this.setState({
 				errors: nextProps.errors,
 				isLoading: false
@@ -47,7 +47,7 @@ class Login extends Component {
 		let content;
 		if (isLoading) {
 			content = (
-				<div>
+				<div className="col s12">
 					<Spinner size="small" />
 				</div>
 			);
@@ -67,7 +67,7 @@ class Login extends Component {
 					<div className="btn-close-cont">
 						<i className="modal-cont far fa-times-circle" />
 					</div>
-					<form onSubmit={this.onSubmit} className="row" noValidate>
+					<form className="row" onSubmit={this.onSubmit} noValidate>
 						<h3 className="center-align">Sign in</h3>
 						<small>* All Fields Are Required!</small>
 
@@ -83,6 +83,7 @@ class Login extends Component {
 								type="password"
 								name="password"
 								value={password}
+								autoComplete="true"
 							/>
 							<label htmlFor="password">
 								{errors.field === 'password' ? errors.message : 'Password *'}
@@ -91,7 +92,7 @@ class Login extends Component {
 						{content}
 					</form>
 					<h6>
-						Don't have an account?{' '}
+						Don't have an account?
 						<a onClick={(event) => this.openAuthModal(event, 'register')} href="#!">
 							Register
 						</a>
@@ -101,6 +102,14 @@ class Login extends Component {
 		);
 	}
 }
+
+Login.propTypes = {
+	auth: PropTypes.object.isRequired,
+	errors: PropTypes.object.isRequired,
+	setAuthModal: PropTypes.func.isRequired,
+	authUser: PropTypes.func.isRequired,
+	closeModal: PropTypes.func.isRequired
+};
 
 const mapStateToProps = (state) => ({
 	auth: state.auth,

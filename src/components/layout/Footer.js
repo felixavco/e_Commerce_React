@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types'; 
 import MainNav from './navbar/MainNav';
 import AuthModal from '../authentication/AuthModal';
 import { Link } from 'react-router-dom';
@@ -6,9 +7,11 @@ import { connect } from 'react-redux';
 
 const Footer = ({isAuthenticated}) => {
 	let content;
+	
 	if(!isAuthenticated) {
 		content = <AuthModal />
 	}
+
 	return (
 		<Fragment>
 			{ content }
@@ -61,6 +64,10 @@ const Footer = ({isAuthenticated}) => {
 		</Fragment>
 	);
 };
+
+Footer.propTypes = { 
+	isAuthenticated: PropTypes.bool.isRequired
+}
 
 const mapStateToProps = state => ({
 	isAuthenticated: state.auth.isAuthenticated

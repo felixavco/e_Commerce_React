@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import country_list from '../../customer/country_list';
 country_list.unshift("Please Select");
 
@@ -40,7 +41,7 @@ const Address = ({ address, onchange, regions, shipping_options }) => {
 				<label style={{ position: `${address_2 ? 'static' : 'absolute'}` }} htmlFor="address_2">
 					Address 2
 				</label>
-				<input onChange={onchange} type="text" name="address_2" value={address_2} id="address_2" />
+				<input onChange={onchange} type="text" name="address_2" value={address_2 || ""} id="address_2" />
 			</div>
 
 			<div className="row">
@@ -49,7 +50,7 @@ const Address = ({ address, onchange, regions, shipping_options }) => {
 						<label style={{ position: `${city ? 'static' : 'absolute'}` }} htmlFor="city">
 							City
 						</label>
-						<input onChange={onchange} type="text" name="city" value={city} id="city" />
+						<input onChange={onchange} type="text" name="city" value={city || ""} id="city" />
 					</div>
 				</div>
 				<div className="col s12 m4">
@@ -57,7 +58,7 @@ const Address = ({ address, onchange, regions, shipping_options }) => {
 						<label style={{ position: `${region ? 'static' : 'absolute'}` }} htmlFor="region">
 							Region
 						</label>
-						<input onChange={onchange} type="text" name="region" value={region} id="region" />
+						<input onChange={onchange} type="text" name="region" value={region || ""} id="region" />
 					</div>
 				</div>
 				<div className="col s12 m4">
@@ -70,7 +71,7 @@ const Address = ({ address, onchange, regions, shipping_options }) => {
 							onChange={onchange}
 							type="text"
 							name="postal_code"
-							value={postal_code}
+							value={postal_code || ""}
 						/>
 					</div>
 				</div>
@@ -120,5 +121,12 @@ const Address = ({ address, onchange, regions, shipping_options }) => {
 		</div>
 	);
 };
+
+Address.propTypes = { 
+	address: PropTypes.object.isRequired, 
+	onchange: PropTypes.func.isRequired, 
+	regions: PropTypes.array.isRequired, 
+	shipping_options: PropTypes.array.isRequired, 
+}
 
 export default Address;

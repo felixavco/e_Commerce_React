@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { updateProfile, getProfile, updateCreditCard } from '../../redux/actions/customerActions';
 
@@ -81,7 +82,7 @@ class EditBasicInfo extends Component {
 								placeholder="Enter your primary phone number"
 								onChange={this.onChange}
 								name="day_phone"
-								value={day_phone}
+								value={day_phone || ""}
 								type="text"
 							/>
 						</li>
@@ -93,7 +94,7 @@ class EditBasicInfo extends Component {
 								placeholder="Enter your secondary phone number"
 								onChange={this.onChange}
 								name="eve_phone"
-								value={eve_phone}
+								value={eve_phone || ""}
 								type="text"
 							/>
 						</li>
@@ -105,7 +106,7 @@ class EditBasicInfo extends Component {
 								placeholder="Enter your mobile number"
 								onChange={this.onChange}
 								name="mob_phone"
-								value={mob_phone}
+								value={mob_phone || ""}
 								type="text"
 							/>
 						</li>
@@ -125,6 +126,14 @@ class EditBasicInfo extends Component {
 			</div>
 		);
 	}
+}
+
+EditBasicInfo.propTypes = {
+	profile: PropTypes.object.isRequired, 
+	updateProfile: PropTypes.func.isRequired, 
+	getProfile: PropTypes.func.isRequired, 
+	updateCreditCard: PropTypes.func.isRequired, 
+	closeEditMode: PropTypes.func.isRequired, 
 }
 
 const mapStateToProps = (state) => ({

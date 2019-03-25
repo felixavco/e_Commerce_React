@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 //Components
 import Loading from '../commons/Loading';
 import Pagination from './Pagination';
@@ -105,6 +106,15 @@ class SearchResults extends Component {
 			</div>
 		);
 	}
+}
+
+SearchResults.propTypes = {
+	allProducts: PropTypes.array.isRequired,
+	errors: PropTypes.object.isRequired,
+	totalProducts: PropTypes.number.isRequired,
+	searchQuery: PropTypes.string.isRequired,
+	searchProducts: PropTypes.func.isRequired,
+	getProducts: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({

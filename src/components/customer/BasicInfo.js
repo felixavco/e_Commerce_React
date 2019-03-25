@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import EditBasicInfo from './EditBasicInfo';
 
 class  BasicInfo extends Component {
@@ -61,6 +62,10 @@ class  BasicInfo extends Component {
       </div>
     )
   }
+}
+
+BasicInfo.propTypes = {
+  profile: PropTypes.object.isRequired
 }
 
 export default BasicInfo

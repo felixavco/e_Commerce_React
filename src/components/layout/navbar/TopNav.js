@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
+
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAuthModal } from '../../../redux/actions/authActions';
@@ -97,13 +99,13 @@ class TopNav extends Component {
 					<nav>
 						<ul className="secondary-menu">
 							<li>
-								<Link to="/daily-deals">Daily Deals</Link>
+								<Link to="/">Daily Deals</Link>
 							</li>
 							<li>
-								<Link to="/sell">Sell</Link>
+								<Link to="/">Sell</Link>
 							</li>
 							<li>
-								<Link to="/help-contact">Help & Contact</Link>
+								<Link to="/">Help & Contact</Link>
 							</li>
 						</ul>
 					</nav>
@@ -123,6 +125,16 @@ class TopNav extends Component {
 			</div>
 		);
 	}
+}
+
+TopNav.propTypes = {
+	setAuthModal: PropTypes.func.isRequired,
+	closeMenu: PropTypes.func.isRequired,
+	logout: PropTypes.func.isRequired,
+	isAuth: PropTypes.bool.isRequired,
+	name: PropTypes.string.isRequired,
+	bagCount: PropTypes.number.isRequired,
+	totalAmount: PropTypes.any,
 }
 
 export default connect(null, { setAuthModal })(TopNav);

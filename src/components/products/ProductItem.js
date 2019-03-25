@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { baseURL } from '../../config/config';
 import { connect } from 'react-redux';
 import { getSingleProduct, getProdAttr, getProductReviews } from '../../redux/actions/productsAction';
@@ -37,5 +38,12 @@ const ProductItem = ({ product, getSingleProduct, getProdAttr, getProductReviews
 		</div>
 	);
 };
+
+ProductItem.propTypes = {
+	product: PropTypes.object.isRequired,
+	getSingleProduct: PropTypes.func.isRequired,
+	getProdAttr: PropTypes.func.isRequired,
+	getProductReviews: PropTypes.func.isRequired
+}
 
 export default connect(null, { getSingleProduct, getProdAttr, getProductReviews })(ProductItem);

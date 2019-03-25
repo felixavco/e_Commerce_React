@@ -20,7 +20,7 @@ const initialState = {
 	totalProducts: 0, //Total number of products in Cart (Bag)
 	productReviews: [],
   deparments: [], 
-	categories: {}, 
+	categories: [], 
 	deparment_id: 1,
 	category_id: 1,
 	searchQuery: '' //The search query is set on the search bar in the nav and is used in the Search page to make the search

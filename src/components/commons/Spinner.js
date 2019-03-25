@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const Spinner = ({size = ""}) => {
+const Spinner = ({size}) => {
 
 	const contStyles = {
 		display: 'flex',
@@ -26,5 +27,9 @@ const Spinner = ({size = ""}) => {
 		</div>
 	);
 };
+
+Spinner.propTypes = { 
+	size: PropTypes.string
+}
 
 export default Spinner;

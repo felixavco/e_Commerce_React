@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import moment from 'moment';
 import StarRatings from 'react-star-ratings';
@@ -40,6 +41,10 @@ class Reviews extends Component {
 			</div>
 		);
 	}
+}
+
+Reviews.propTypes = {
+	productReviews: PropTypes.array.isRequired
 }
 
 const mapStateToProps = (state) => ({

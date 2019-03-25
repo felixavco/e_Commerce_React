@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import EditAddress from './EditAddress';
+import PropTypes from 'prop-types';
 
 class Address extends Component {
 
@@ -96,6 +97,11 @@ class Address extends Component {
       </div>
     )
   }
+}
+
+Address.propTypes = {
+  profile: PropTypes.object.isRequired,
+  shipping_regions: PropTypes.array
 }
 
 export default Address

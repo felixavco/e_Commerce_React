@@ -71,10 +71,13 @@ class AuthModal extends Component {
 	}
 }
 
-AuthModal.propTypes = {};
+AuthModal.propTypes = {
+	modal_state: PropTypes.string,
+	setAuthModal: PropTypes.func.isRequired
+};
 
 const mapStateToProps = (state) => ({
-	modal_state: state.auth.modal_state
+	modal_state: state.auth.modal_state, 
 });
 
 export default connect(mapStateToProps, { setAuthModal })(AuthModal);

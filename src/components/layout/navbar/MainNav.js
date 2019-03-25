@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 //Router
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -19,6 +20,13 @@ const MainNav = ({ closeMenu, deparments, setDeptId }) => {
 		</nav>
 	);
 };
+
+MainNav.propTypes = {
+	deparments: PropTypes.array.isRequired, 
+	getDeparments: PropTypes.func.isRequired, 
+	setDeptId: PropTypes.func.isRequired,
+	closeMenu: PropTypes.func
+}
 
 const mapStateToProps = (state) => ({
 	deparments: state.products.deparments

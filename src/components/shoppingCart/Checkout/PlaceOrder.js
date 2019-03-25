@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getTaxes, placeOrder, setTotalToPay } from '../../../redux/actions/shoppingCartActions';
@@ -95,6 +96,13 @@ class PlaceOrder extends Component {
 
 		return <div className="place-order container">{content}</div>;
 	}
+}
+
+PlaceOrder.propTypes = { 
+	auth: PropTypes.object.isRequired, 
+	totalAmount: PropTypes.string.isRequired, 
+	shippingOptions: PropTypes.array.isRequired, 
+	taxes: PropTypes.array.isRequired
 }
 
 const mapStateToProps = (state) => ({

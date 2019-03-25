@@ -10,7 +10,7 @@ import {
 } from '../actions/types'
 
 const initialState = {
-  totalAmount: 0, //Total amount $ 
+  totalAmount: "0", //Total amount $ 
   qtyAllProd: 0,  //Quantity of products in Cart (bag)
   productsInCart: [], 
   shippingOptions: [], 

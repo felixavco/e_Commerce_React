@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { baseURL } from '../../../config/config';
 const imgURL = baseURL + '/images/products/';
 
@@ -10,7 +11,7 @@ class Gallery extends Component {
 	render() {
 		const content = this.props.images.map((img, i) => (
 			<span key={i}>
-				<img onClick={this.onSelect} src={imgURL + img} alt="img"/>
+				<img onClick={this.onSelect} src={ imgURL + img } alt="img"/>
 			</span>
 		));
 		return (
@@ -25,6 +26,10 @@ class Gallery extends Component {
 			</div>
 		);
 	}
+}
+
+Gallery.propTypes = { 
+	images: PropTypes.array.isRequired, 
 }
 
 export default Gallery;

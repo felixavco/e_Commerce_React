@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCartId, clearCart, getTotalAmount } from '../../redux/actions/shoppingCartActions';
 import CartItem from './CartItem';
@@ -76,6 +77,12 @@ class MyBag extends Component {
 		}
 		return <div className="container my-bag">{content}</div>;
 	}
+}
+
+MyBag.propTypes = { 
+	auth: PropTypes.object.isRequired, 
+	productsInCart: PropTypes.array, 
+	totalAmount: PropTypes.any, 
 }
 
 const mapStateToProps = (state) => ({

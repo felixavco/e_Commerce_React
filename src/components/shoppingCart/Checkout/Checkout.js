@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getShipRegs, getProfile } from '../../../redux/actions/customerActions';
@@ -165,6 +166,17 @@ class Checkout extends Component {
 			</div>
 		);
 	}
+}
+
+Checkout.propTypes = { 
+	auth: PropTypes.object.isRequired, 
+	regions: PropTypes.array.isRequired, 
+	shippingOptions: PropTypes.array.isRequired, 
+	profile: PropTypes.object.isRequired, 
+	totalAmount: PropTypes.string.isRequired, 
+	getShipRegs: PropTypes.func.isRequired, 
+	getProfile: PropTypes.func.isRequired, 
+	getShippingOptions: PropTypes.func.isRequired, 
 }
 
 const mapStateToProps = (state) => ({
