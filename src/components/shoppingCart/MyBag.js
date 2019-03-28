@@ -21,12 +21,6 @@ class MyBag extends Component {
 		}
 	};
 
-	componentDidMount() {
-		if (!this.state.cartId) {
-			this.props.getCartId();
-		}
-	}
-
 	deleteCartItems = () => {
 		this.props.clearCart();
 	};

@@ -6,6 +6,7 @@ import Attributes from './Attributes';
 import { addProdToChart, getTotalAmount } from '../../../redux/actions/shoppingCartActions';
 import { clearSingleProduct } from '../../../redux/actions/productsAction';
 
+
 class AddToCart extends Component {
 	state = {
 		colors: [],
@@ -29,7 +30,7 @@ class AddToCart extends Component {
 
 	onChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
-	addProduct = (e) => {
+	addProduct = (e) => { 
 		e.preventDefault();
 		const { product_id } = this.props;
 		const { color, size } = this.state;

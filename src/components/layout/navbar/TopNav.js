@@ -132,7 +132,7 @@ TopNav.propTypes = {
 	closeMenu: PropTypes.func.isRequired,
 	logout: PropTypes.func.isRequired,
 	isAuth: PropTypes.bool.isRequired,
-	name: PropTypes.string.isRequired,
+	name: PropTypes.string,
 	bagCount: PropTypes.number.isRequired,
 	totalAmount: PropTypes.any,
 }

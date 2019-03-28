@@ -7,7 +7,8 @@ import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../../redux/actions/authActions';
 import { setSearchQuery, getDeparments } from '../../../redux/actions/productsAction';
-import { getTotalAmount, getProdInCart } from '../../../redux/actions/shoppingCartActions';
+import { getTotalAmount, getProdInCart, getCartId } from '../../../redux/actions/shoppingCartActions';
+
 let timer;
 
 class Navbar extends Component {
@@ -44,6 +45,10 @@ class Navbar extends Component {
 		this.props.getTotalAmount();
 		this.props.getProdInCart();
 		this.props.getDeparments();
+		//Gets a unique card ID
+		if(!localStorage.turingShoppingCart) {
+			this.props.getCartId();
+		}
 	}
 
 	closeMenu = () => this.setState({ isMenuActive: false });
@@ -110,13 +115,14 @@ class Navbar extends Component {
 
 Navbar.propTypes = {
 	auth: PropTypes.object.isRequired,
-	totalAmount: PropTypes.string,
+	totalAmount: PropTypes.any,
 	qtyAllProd: PropTypes.number.isRequired,
 	logoutUser: PropTypes.func.isRequired,
 	setSearchQuery: PropTypes.func.isRequired,
 	getTotalAmount: PropTypes.func.isRequired,
 	getProdInCart: PropTypes.func.isRequired,
 	getDeparments: PropTypes.func.isRequired,
+	getCartId: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
@@ -125,6 +131,6 @@ const mapStateToProps = (state) => ({
 	qtyAllProd: state.shoppingCart.qtyAllProd
 });
 
-export default connect(mapStateToProps, { logoutUser, setSearchQuery, getTotalAmount, getProdInCart, getDeparments })(
+export default connect(mapStateToProps, { logoutUser, setSearchQuery, getTotalAmount, getProdInCart, getDeparments, getCartId })(
 	withRouter(Navbar)
 );
