@@ -24,18 +24,29 @@ class Payment extends Component {
 	}
 
 	render() {
-    let mainBtn;
-    if(this.state.description.trim() === "") {
-      mainBtn = <button className="disabled" disabled >PAY NOW</button>
-    } else {
-      mainBtn = <button onClick={this.makePayment}>PAY NOW</button>
-    }
+		let mainBtn;
+		if (this.state.description.trim() === '') {
+			mainBtn = (
+				<button className="disabled" disabled>
+					PAY NOW
+				</button>
+			);
+		} else {
+			mainBtn = <button onClick={this.makePayment}>PAY NOW</button>;
+		}
 		return (
 			<div className="payment container">
 				<h4 className="center-align">Payment</h4>
 
 				<table>
 					<tbody>
+						<tr>
+							<td> Name:</td>
+							<td>
+								<span>{this.props.userName}</span>
+							</td>
+						</tr>
+
 						<tr>
 							<td> Total to Pay:</td>
 							<td>
@@ -62,22 +73,22 @@ class Payment extends Component {
 					/>
 				</div>
 
-				<div className="btn-cont">
-					{ mainBtn }
-				</div>
+				<div className="btn-cont">{mainBtn}</div>
 			</div>
 		);
 	}
 }
 
-Payment.propTypes = { 
-	totalToPay: PropTypes.number.isRequired, 
+Payment.propTypes = {
+	totalToPay: PropTypes.number.isRequired,
 	placed_order: PropTypes.number.isRequired, 
-}
+	userName: PropTypes.string.isRequired
+};
 
 const mapStateToProps = (state) => ({
 	totalToPay: state.shoppingCart.totalToPay,
-	placed_order: state.shoppingCart.placed_order
+	placed_order: state.shoppingCart.placed_order,
+	userName: state.auth.user.name
 });
 
 export default connect(mapStateToProps, { stripeCharge })(withRouter(Payment));

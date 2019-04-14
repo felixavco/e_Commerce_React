@@ -10,7 +10,7 @@ import {
 	PLACE_ORDER,
 	SET_TOTAL_TO_PAY
 } from './types';
-import { baseURL, stripe_public_token } from '../../config/config';
+import { baseURL } from '../../config/config';
 
 /**
  * Method: GET
@@ -268,11 +268,10 @@ export const getOrders = () => (dispatch) => {
  * Protected: false
  * Desc: Performs the payment through stripe
  */
-export const stripeCharge = (data, callback) => dispatch => {
-	data.stripeToken = stripe_public_token;
+export const stripeCharge = (data) => dispatch => {
 	axios
 		.post(baseURL + "/stripe/charge", data)
-		.then(() => callback())
+		.then(() => console.log("Payment Successfuly"))
 		.catch(err => {
 			dispatch({
 				type: GET_ERRORS,

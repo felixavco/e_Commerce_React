@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 //Components
 import Loading from '../commons/Loading';
@@ -53,9 +53,7 @@ class AllProducts extends Component {
 				<div className="products-List">
 					<Pagination itemsPerPage={itemsPerPage} descriptionLen={descriptionLen} />
 
-					<Fragment>
 						<Products products={products} addToChart={this.addToChart} />
-					</Fragment>
 
 					<Pagination itemsPerPage={itemsPerPage} descriptionLen={descriptionLen} />
 				</div>

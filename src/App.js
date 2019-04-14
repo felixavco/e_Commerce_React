@@ -27,7 +27,6 @@ import Profile from './components/customer/Profile';
 //Shopping Cart Components
 import MyBag from './components/shoppingCart/MyBag';
 import Checkout from './components/shoppingCart/Checkout/Checkout';
-import Payment from './components/shoppingCart/Checkout/Payment';
 //Nof Found Page
 import NotFound from './components/commons/NotFound';
 
@@ -66,7 +65,6 @@ class App extends Component {
 									<Route exact path="/deparment/:deptId" component={Department} />
 									<Route exact path="/category/:catId" component={Category} />
 									<Route exact path="/checkout" component={Checkout} />
-									<Route exact path="/payment" component={Payment} />
 									{/* Private Routes */}
 									<PrivateRoute exact path="/profile" component={Profile} />
 									{/* CatchAll route  404 page */}

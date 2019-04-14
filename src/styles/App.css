@@ -1266,6 +1266,60 @@ header {
         box-shadow: 1px 1px 3px #2e2e2e;
         background-color: #afafaf; }
 
+.stripeForm {
+  background: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: -150%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  -webkit-transition: top 250ms ease-in-out;
+  -o-transition: top 250ms ease-in-out;
+  transition: top 250ms ease-in-out; }
+  .stripeForm .test {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 100vh; }
+    .stripeForm .test .form_cont {
+      background: #fff;
+      padding: 2rem;
+      margin: auto; }
+      .stripeForm .test .form_cont form input {
+        border: 1px solid #9e9e9e;
+        border-radius: 0.5rem;
+        text-align: center; }
+        .stripeForm .test .form_cont form input:focus {
+          border-bottom: 1px solid #9e9e9e;
+          -webkit-box-shadow: none;
+          box-shadow: none; }
+      .stripeForm .test .form_cont form .creditCard_cont {
+        padding: 0.8rem;
+        border: 1px solid #9e9e9e;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem; }
+      .stripeForm .test .form_cont form .form_btn-cont {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: distribute;
+        justify-content: space-around;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center; }
+        .stripeForm .test .form_cont form .form_btn-cont button {
+          background: #F62F5E; }
+
+.card-form-active {
+  top: 0; }
+
 footer {
   z-index: 100;
   background-color: #2E2E2E;

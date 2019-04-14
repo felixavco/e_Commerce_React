@@ -1,0 +1,57 @@
+.stripeForm {
+	background: rgba($color: #000000, $alpha: 0.7);
+	position: fixed;
+	top: -150%;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 100;
+	transition: top 250ms ease-in-out;
+
+	.test {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100vh;
+
+		.form_cont {
+			background: #fff;
+			padding: 2rem;
+			margin: auto;
+
+			
+
+			form {
+				input {
+					border: 1px solid #9e9e9e;
+          border-radius: 0.5rem;
+          text-align: center;
+					&:focus {
+						border-bottom: 1px solid #9e9e9e;
+						box-shadow: none;
+					}
+				}
+				.creditCard_cont {
+          padding: 0.8rem;
+          border: 1px solid #9e9e9e;
+          border-radius: 0.5rem;
+          margin-bottom: 1rem;
+        }
+
+        .form_btn-cont {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+
+          button {
+            background: $primary
+          }
+        }
+			}
+		}
+	}
+}
+
+.card-form-active {
+	top: 0;
+}
